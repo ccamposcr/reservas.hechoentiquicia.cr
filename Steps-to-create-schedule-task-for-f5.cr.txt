@@ -1,0 +1,4 @@
+Description : checkExpiredReservations
+Path to an executable file * : C:\Program Files (x86)\Parallels\Plesk\Additional\PleskPHP54\php-cgi.exe
+Arguments : G:\PleskVhosts\f5.cr\httpdocs\STAGE\cronjobs\checkExpiredReservations.php
+G:\PleskVhosts\f5.cr\httpdocs\cronjobs\checkExpiredReservations.php

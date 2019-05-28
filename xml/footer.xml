@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<footer>
+	<escazu>
+		<detail>Desde Santa Ana o Guachipelin: De la entrada principal del Costa Rica Country Club, 500 mts Sur, 100 Mts Oeste, contiguos a fabrica de T&amp;eacute; Mondaiza.
+&lt;br/&gt;&lt;br/&gt;Desde San Jos&amp;eacute;: Del Scotiabank 1.5km al sur (subiendo hacia escaz&amp;eacute; Centro), 600 mts Oeste, contiguos a f&amp;aacute;brica de T&amp;eacute; Mondaiza.
+&lt;br/&gt;&lt;br/&gt;Desde Escaz&amp;uacute; Centro: Del Banco Nacional 400 mts Norte, 100 oeste, contiguos a f&amp;aacute;brica de T&amp;eacute; Mondaiza.</detail>
+		<mapUrl>https://goo.gl/itWeJb</mapUrl>
+		<phone1>(506) 8376-2121</phone1>
+		<phone2>(506) 7206-3300</phone2>
+		<email>info@f5.cr</email>
+		<waze>http://waze.to/lr/hd1u0mq3ux</waze>
+	</escazu>
+
+	<desamparados>
+		<detail>Del costado este del Centro Comercial Multicentro, 300 mts norte, sobre la carretera a Calle Fallas.</detail>
+		<mapUrl></mapUrl>
+		<phone1>(506) 8376-2121</phone1>
+		<phone2>(506) 7206-3300</phone2>
+		<email>info@f5.cr</email>
+		<waze>http://waze.to/lr/hd1u0mq3ux</waze>
+	</desamparados>
+</footer>

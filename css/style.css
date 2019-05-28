@@ -1,0 +1,1106 @@
+/*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+html,
+button,
+input,
+select,
+textarea {
+  color: #222;
+}
+html {
+  font-size: 1em;
+  line-height: 1.4;
+}
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+/*
+ * A better looking default horizontal rule
+ */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+/*
+ * Remove the gap between images, videos, audio and canvas and the bottom of
+ * their containers: h5bp.com/i/440
+ */
+audio,
+canvas,
+img,
+video {
+  vertical-align: middle;
+}
+/*
+ * Remove default fieldset styles.
+ */
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+/*
+ * Allow only vertical resizing of textareas.
+ */
+textarea {
+  resize: vertical;
+}
+/* ==========================================================================
+   Browse Happy prompt
+   ========================================================================== */
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000000;
+  padding: 0.2em 0;
+}
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+/* Color Variables */
+/* Fonts Variables */
+/* ==========================================================================
+   LOADER
+========================================================================== */
+.loading .modal-body img {
+  margin: 0 auto;
+  display: block;
+}
+.loading .modal-body p {
+  text-align: center;
+}
+#loading-modal {
+  display: block;
+  opacity: 1;
+}
+.capitalize-text {
+  text-transform: capitalize;
+}
+/* ==========================================================================
+   MODAL
+========================================================================== */
+.modal-header {
+  background-color: #3a3333;
+  padding: 10px 15px 5px;
+}
+.modal-header button span {
+  color: #ffffff;
+}
+.modal-header h4 {
+  font-family: 'eurostileregular';
+  color: #ffffff;
+  font-size: 20px;
+}
+.modal-body {
+  margin-top: 0;
+  padding-top: 6px;
+  font-family: 'eurostileregular';
+}
+.modal-body h3 {
+  font-weight: bold;
+}
+.modal-body ol {
+  font-size: 17px;
+  font-weight: normal;
+}
+.modal-body ol dt {
+  font-weight: normal;
+}
+#bookingOnLine dl {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+#bookingOnLine dl dt {
+  margin-bottom: 5px;
+}
+#bookingOnLine dl dt .selectUserBtn {
+  margin-left: 259px;
+}
+#bookingOnLine dl dd.contentInfoForm {
+  margin: 0;
+}
+#bookingOnLine dl dd.contentInfoForm label {
+  width: 75px;
+  margin-left: 15px;
+}
+#bookingOnLine dl dd.contentInfoForm input {
+  display: inline-block;
+  width: 450px;
+  margin-bottom: 8px;
+}
+#bookingOnLine .error {
+  color: #c4302c;
+  margin-left: 95px;
+  display: block;
+}
+#bookingOnLine .checkbox dl {
+  margin-bottom: 0;
+}
+#bookingOnLine .checkbox button {
+  margin-left: -41px;
+}
+#carDataForm {
+  display: none;
+}
+#carDataForm dl dd.contentInfoForm label {
+  width: 95px;
+}
+#carDataForm dl dd.contentInfoForm input.input_ccv {
+  width: 60px;
+}
+#carDataForm dl dd.contentInfoForm input.input_number {
+  width: 202px;
+}
+#carDataForm dl dd.contentInfoForm select {
+  width: 202px;
+  height: 30px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+#carDataForm dl dd.contentInfoForm.paymentInformation {
+  padding-left: 15px;
+  margin-bottom: 25px;
+}
+#carDataForm .error {
+  margin-left: 115px;
+}
+.modal-footer {
+  background-color: #3a3333;
+  padding: 10px;
+}
+.modal-footer button {
+  background-color: #c4302c;
+  color: #ffffff;
+}
+.modal-footer .reserveBtn[disabled] {
+  background-color: #d2cfcf;
+}
+#formReservationModal .modal-header h4 {
+  float: left;
+}
+#formReservationModal .modal-header h4 > span {
+  font-size: 14px;
+}
+#formReservationModal .modal-header p {
+  float: right;
+  color: #ffffff;
+  margin: 0;
+}
+#formReservationModal .modal-body {
+  padding-bottom: 0;
+}
+#formReservationModal .paymentInformation {
+  padding-left: 15px;
+  margin-bottom: 25px;
+}
+#formReservationModal .paymentInformation h4 {
+  font-weight: bold;
+}
+#formReservationModal .paymentInformation table tr.total {
+  font-weight: bold;
+}
+#formReservationModal .paymentInformation table tr th {
+  width: 150px;
+}
+#formReservationModal .paymentInformation table tr td {
+  border: 1px solid #3a3333;
+  padding: 5px;
+}
+#edit-account-modal .modal-body {
+  padding-bottom: 10px;
+}
+#edit-account-modal form label {
+  width: 180px;
+  font-size: 16px;
+}
+#edit-account-modal form input {
+  width: 300px;
+  display: inline-block;
+  margin-top: 5px;
+}
+#edit-account-modal form .error {
+  color: #c4302c;
+  display: block;
+  margin-left: 180px;
+}
+#edit-account-modal form .userAccountToEdit {
+  display: inline-block;
+  width: 52%;
+  font-size: 16px;
+}
+#edit-account-modal .changePasswordBtn[disabled] {
+  background-color: #d2cfcf;
+}
+#search-modal .modal-body {
+  height: 360px;
+  overflow: auto;
+}
+#search-modal input.searchInput {
+  border-radius: 5px;
+  padding: 6px;
+  margin-bottom: 15px;
+  width: 300px;
+}
+#search-modal input.client {
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+#search-modal table tr {
+  border-bottom: 1px solid #d2cfcf;
+}
+#search-modal table tr th {
+  width: 180px;
+  font-size: 16px;
+  color: #c4302c;
+}
+#search-modal .client_info {
+  padding: 3px;
+}
+#check-availability-modal {
+  text-align: left;
+}
+#check-availability-modal .modal-body {
+  height: 360px;
+  overflow: auto;
+}
+#check-availability-modal .modal-body span {
+  width: 136px;
+  display: -webkit-inline-box;
+  margin: 5px 10px;
+  border-bottom: 1px solid #d2cfcf;
+}
+#check-availability-modal .busy {
+  background-color: #c4302c;
+  color: #ffffff;
+}
+#show-info-modal .modal-body label {
+  width: 150px;
+  font-size: 15px;
+}
+#show-info-modal .modal-body button {
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+#show-info-modal .modal-body .pitchInformation {
+  color: #c4302c;
+  margin-top: 10px;
+}
+#show-info-modal .modal-body .pitchInformation p {
+  margin: 0;
+  font-weight: bold;
+  margin-bottom: 22px;
+  font-size: 16px;
+}
+#show-info-modal .modal-body .pitchInformation input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+  position: relative;
+  top: 4px;
+  margin-right: 10px;
+}
+#show-info-modal .modal-body .pitchInformation span {
+  font-weight: bold;
+}
+#show-info-modal .error {
+  display: block;
+  margin-left: 154px;
+  color: #c4302c;
+}
+#show-accounts-modal table tr {
+  border-bottom: 1px solid #d2cfcf;
+}
+#show-accounts-modal table tr th {
+  width: 180px;
+  font-size: 16px;
+  color: #c4302c;
+}
+#show-accounts-modal .client_info {
+  padding: 3px;
+}
+#edit-rates-modal table tr td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+#edit-rates-modal table tr td input {
+  width: 85%;
+}
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+#divWrapperHeader {
+  width: 100%;
+  height: 84px;
+  background-color: rgba(19, 18, 18, 0.76);
+  margin-top: 20px;
+}
+#divContentHeader {
+  width: 960px;
+  margin: 0 auto;
+}
+#divContentHeader span {
+  text-decoration: none;
+  color: #ffffff;
+  float: left;
+  position: absolute;
+  margin: -6px 0 0 70px;
+  text-transform: capitalize;
+  font-size: 14px;
+  font-family: 'eurostileregular';
+}
+#mainNav {
+  display: block;
+  float: right;
+  padding: 0;
+  margin: 0;
+}
+#mainNav li {
+  width: 150px;
+  height: 84px;
+  list-style: none;
+  float: left;
+  text-align: center;
+  font-family: 'eurostileregular';
+  font-size: 16px;
+  line-height: 84px;
+}
+#mainNav li a {
+  text-decoration: none;
+  color: white;
+  display: block;
+}
+#mainNav li a:hover {
+  background-color: #c4302c;
+}
+#mainNav li a.active {
+  background-color: #c4302c;
+}
+#mainNav li.active {
+  background-color: #c4302c;
+}
+#logo {
+  float: left;
+  margin: 6px 0 0 14px;
+}
+#logo a {
+  display: block;
+}
+/* ==========================================================================
+   HOME CONTENT
+   ========================================================================== */
+#divContent {
+  width: 960px;
+  padding: 40px;
+  background-color: rgba(2, 2, 2, 0.29);
+  margin: 18px auto;
+}
+#divContent h1,
+#divContent h2 {
+  color: white;
+  text-align: center;
+  font-family: 'nakamuraregular';
+  font-size: 25px;
+  margin: 0;
+  letter-spacing: 3px;
+}
+#divContent h2 {
+  color: #c4302c;
+  font-size: 19px;
+  text-align: center;
+  text-shadow: 1px 0 0 #240404;
+  margin-bottom: 40px;
+  letter-spacing: 3px;
+}
+#divContent h2 span {
+  font-family: arial;
+  font-size: 25px;
+  font-weight: 800;
+}
+#divContent p {
+  color: white;
+  font-family: 'eurostileregular';
+  font-size: 19px;
+  margin: 40px 0;
+  line-height: 24px;
+}
+#divContentButtons {
+  margin-bottom: 6px;
+}
+#goEscazuSiteBtn,
+#goDesamparadosSiteBtn {
+  width: 260px;
+  height: 100px;
+  border-radius: 5px;
+  background-color: #ff5500;
+  padding: 10px;
+}
+#goEscazuSiteBtn a,
+#goDesamparadosSiteBtn a {
+  display: block;
+  margin: 0 auto;
+}
+#goEscazuSiteBtn img,
+#goDesamparadosSiteBtn img {
+  display: block;
+  margin: 0 auto;
+}
+#goEscazuSiteBtn:hover,
+#goDesamparadosSiteBtn:hover {
+  background-color: #ffffff;
+}
+#goEscazuSiteBtn {
+  float: left;
+  margin-left: 90px;
+}
+#goDesamparadosSiteBtn {
+  float: right;
+  margin-right: 90px;
+}
+/* ==========================================================================
+   CALENDAR
+========================================================================== */
+#calendar {
+  display: block;
+  font-family: 'eurostileregular';
+  color: #ffffff;
+  position: absolute;
+}
+#calendar table {
+  margin-top: 37px;
+  font-size: 16px;
+  width: 200px;
+}
+#calendar table .days_row {
+  display: none;
+  background: #ffffff;
+  color: #3a3333;
+  padding: 3px;
+}
+#calendar table .days_row .day {
+  cursor: pointer;
+}
+#calendar table .days_row .day div {
+  padding: 5px;
+}
+#calendar table .days_row .day:hover {
+  background: #968e8e;
+}
+#calendar table .days_row .day .active {
+  background: #c4302c;
+}
+#calendar table .days_row .day .today {
+  background: #ff5500;
+}
+#calendar table .days_head {
+  display: none;
+  color: #c4302c;
+  background: #ffffff;
+  text-align: center;
+}
+#currentDate {
+  text-align: center;
+}
+#pitchs {
+  float: right;
+  display: none;
+}
+#pitchs ul {
+  list-style-type: none;
+}
+#pitchs ul li {
+  float: left;
+  margin-left: 10px;
+}
+#pitchs ul li a {
+  color: #ffffff;
+  display: block;
+  background-color: #968e8e;
+  font-family: 'eurostileregular';
+  font-size: 14px;
+  text-align: center;
+  line-height: 20px;
+  padding: 5px 25px;
+  text-decoration: none;
+  margin-top: 20px;
+}
+#pitchs ul li a:hover,
+#pitchs ul li a.active {
+  background-color: #c4302c;
+}
+/* ==========================================================================
+   RESERVACIONES
+========================================================================== */
+#dailyResevations {
+  display: none;
+  width: 100%;
+  margin: 0 auto;
+  color: #ffffff;
+  float: left;
+}
+#dailyResevations #timeAndTeamInfo {
+  display: block;
+  padding: 0;
+}
+#dailyResevations #timeAndTeamInfo li {
+  float: left;
+  list-style: none;
+  font-family: 'eurostileregular';
+  font-size: 18px;
+}
+#dailyResevations #timeAndTeamInfo li:nth-child(1) {
+  width: 100px;
+}
+#dailyResevations #timeAndTeamInfo li:nth-child(2),
+#dailyResevations #timeAndTeamInfo li:nth-child(3) {
+  width: 387px;
+  text-align: center;
+}
+#dailyResevations #reservations {
+  list-style-type: none;
+  padding: 0;
+  margin-left: 15px;
+}
+#dailyResevations #reservations li.row > span {
+  display: block;
+  float: left;
+  width: 387px;
+  height: 33px;
+  text-align: center;
+}
+#dailyResevations #reservations li.row > span:not(.reservation-time) {
+  text-transform: capitalize;
+}
+#dailyResevations #reservations li.row > span.blocked {
+  background-color: #c4302c;
+  border: solid 1px #3a3333;
+  margin: 2px;
+  line-height: 30px;
+}
+#dailyResevations #reservations li.row > span.reservation-time {
+  border: none;
+  width: 100px;
+  color: #ffffff;
+  font-family: 'eurostileregular';
+  text-align: left;
+  line-height: 40px;
+  font-size: 16px;
+}
+#dailyResevations #reservations li.row > span.completa {
+  width: 777px;
+  color: #ffffff;
+  border: 1px solid #3a3333;
+  line-height: 30px;
+}
+#dailyResevations #reservations li.row > span.available {
+  cursor: pointer;
+  background-color: #f4753d;
+  border: solid 1px #3a3333;
+  margin: 2px;
+  line-height: 30px;
+}
+#dailyResevations #reservations li.row > span.locked {
+  background-color: #968e8e;
+  border: solid 1px #3a3333;
+  margin: 2px;
+  line-height: 30px;
+}
+#dailyResevations #reservations li.row > span.delete.active {
+  background-color: #000000;
+  border: solid 1px #c4302c;
+  margin: 2px;
+  line-height: 30px;
+}
+#dailyResevations #reservations li.row > span.showInfo {
+  cursor: pointer;
+}
+#dailyResevations .active {
+  font-weight: bold;
+}
+#mainWrapper {
+  width: 100%;
+  background: url('../img/main-background.jpg') top center no-repeat;
+  margin: 0 auto;
+  position: relative;
+}
+.next,
+.prev {
+  color: #ff5500;
+}
+.searchBtn {
+  float: left;
+}
+/* ==========================================================================
+   LOGIN
+========================================================================== */
+#divContent #loginTitle {
+  font-family: 'eurostileregular';
+  font-size: 30px;
+}
+#divContent label {
+  font-family: 'eurostileregular';
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: normal;
+}
+#divContent .content-column {
+  width: 50%;
+  float: left;
+}
+#divContent .content-column.column-2 {
+  padding-left: 45px;
+}
+#divContent .content-column .services li {
+  color: #ffffff;
+  font-family: 'eurostileregular';
+  font-size: 19px;
+}
+#divContent .content-column p {
+  margin-bottom: 10px;
+  font-family: 'eurostileregular';
+  font-size: 20px;
+  font-weight: bold;
+}
+#contentLogin {
+  width: 450px;
+  margin: 20px auto;
+}
+#contentLogin p {
+  color: #c4302c;
+  font-size: 23px;
+  font-family: 'eurostileregular';
+  font-weight: bold;
+  text-align: center;
+  margin: 5px;
+}
+#contentLogin #btnLogin {
+  margin-top: 10px;
+}
+#userStatus {
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+  width: 960px;
+  text-align: right;
+  top: 0;
+  font-size: 16px;
+  font-family: 'eurostileregular';
+}
+#userStatus a {
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0 5px;
+}
+#userStatus a:hover {
+  color: #c4302c;
+}
+#userStatus span {
+  color: #ff5500;
+  margin: 0 5px;
+}
+/* ==========================================================================
+   GALLERY
+========================================================================== */
+.divMainContentGallery .slider {
+  width: 650px;
+  height: 450px;
+  margin: 20px  auto 0;
+  border: 5px solid #282626;
+}
+.divMainContentGallery .flex-direction-nav .flex-prev {
+  background: url(../img/img-previous.png) no-repeat;
+}
+.divMainContentGallery .flex-direction-nav .flex-prev:before {
+  display: block;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.divMainContentGallery .flex-direction-nav .flex-next {
+  background: url(../img/img-next.png) no-repeat 0 0;
+}
+.divMainContentGallery .flex-direction-nav .flex-next:before {
+  display: block;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.divMainContentGallery .slides img {
+  width: 650px;
+  height: 440px;
+}
+.carousel {
+  width: 650px;
+  height: 85px;
+  margin: 0 auto;
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: none;
+}
+.carousel .slides img {
+  width: 120px;
+  height: 85px;
+}
+.album-header {
+  color: #ffffff;
+}
+.album-header:hover {
+  color: #000000;
+}
+/* ==========================================================================
+   FOOTER 
+   ========================================================================== */
+#divWrapperFooter {
+  width: 100%;
+  background: url(../img/footer-background.jpg) center center repeat;
+  padding-top: 10px;
+}
+#divContentFooter {
+  width: 960px;
+  margin: 0 auto;
+  padding: 10px 25px;
+  border-top: 1px solid rgba(11, 11, 11, 0.3);
+}
+#divSocialsIcons {
+  margin: 0px auto;
+  display: table;
+}
+#divSocialsIcons a.fa-facebook,
+#divSocialsIcons a.fa-twitter,
+#divSocialsIcons a.fa-youtube {
+  height: 40px;
+  width: 40px;
+  border-radius: 100px;
+  float: left;
+  margin: 20px 10px;
+  text-decoration: none;
+  display: block;
+  font-size: 25px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 39px;
+}
+#divSocialsIcons a.fa-facebook:hover,
+#divSocialsIcons a.fa-twitter:hover,
+#divSocialsIcons a.fa-youtube:hover {
+  text-decoration: none;
+}
+a.fa-facebook {
+  background-color: #3b5a99;
+}
+a.fa-facebook:hover {
+  background-color: #968e8e;
+}
+a.fa-twitter {
+  background-color: #009fd1;
+}
+a.fa-twitter:hover {
+  background-color: #968e8e;
+}
+a.fa-youtube {
+  background-color: #c4302c;
+}
+a.fa-youtube:hover {
+  background-color: #968e8e;
+}
+#copy-right {
+  color: #ffffff;
+  font-family: 'eurostileregular';
+  font-size: 16px;
+  margin: 0 auto;
+  display: table;
+  width: 100%;
+  text-align: center;
+}
+#siteseal img {
+  width: 15%;
+}
+/* ==========================================================================
+  INTERNAL FOOTER
+   ========================================================================== */
+#divContentInfoFooter span,
+#contentSocialIcons span,
+#infoContact > span {
+  color: #ffffff;
+  font-family: 'eurostileregular';
+  font-size: 18px;
+  text-transform: capitalize;
+  height: 160px;
+}
+#contentSocialIcons {
+  width: 250px;
+}
+#infoContact {
+  width: 240px;
+}
+#divContentInfoFooter {
+  width: 400px;
+  float: left;
+}
+#divContentInfoFooter p {
+  color: #ffffff;
+  font-family: 'eurostileregular';
+  font-size: 16px;
+  text-align: justify;
+}
+.sticky-footer {
+  position: absolute;
+  bottom: 0;
+}
+#contentSocialIcons {
+  float: left;
+}
+#contentSocialIcons span {
+  margin-left: 83px;
+}
+#contentSocialIcons #socialIcons {
+  width: 200px;
+  margin: 0 auto;
+}
+#contentSocialIcons a.fa-facebook,
+#contentSocialIcons a.fa-twitter,
+#contentSocialIcons a.fa-youtube {
+  height: 40px;
+  width: 40px;
+  border-radius: 100px;
+  float: left;
+  margin: 13px 9px;
+  text-decoration: none;
+  display: block;
+  font-size: 25px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 40px;
+}
+#contentSocialIcons a.fa-facebook:hover,
+#contentSocialIcons a.fa-twitter:hover,
+#contentSocialIcons a.fa-youtube:hover {
+  text-decoration: none;
+}
+#contentSocialIcons a.fa-facebook {
+  margin-left: 85px;
+}
+#infoContact {
+  float: right;
+}
+#infoContact span {
+  margin-left: 40px;
+}
+#infoContact ul {
+  padding: 0;
+  margin-top: 5px;
+}
+#infoContact ul li a {
+  list-style: none;
+  color: #ffffff;
+  font-family: 'eurostileregular';
+  font-size: 16px;
+  padding: 0;
+  text-decoration: none;
+  margin-left: 20px;
+  display: inline-block;
+}
+#infoContact ul li a.phone-2 {
+  margin-left: 80px;
+  margin-top: 5px;
+}
+#infoContact ul li span {
+  font-size: 18px;
+  color: #ff5500;
+  padding: 7px 3px 0 0;
+  margin-left: 40px;
+  width: 20px;
+}
+#infoContact ul li span img {
+  width: 10%;
+  margin: 5px -3px 0 -3px;
+}
+#divContentErrorPage {
+  padding: 110px 0;
+}
+#divContentErrorPage p {
+  font-family: 'eurostileregular';
+  font-size: 30px;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+}
+#divContentErrorPage span {
+  font-family: 'eurostileregular';
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+  display: block;
+}
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+/*
+ * Image replacement
+ */
+.ir {
+  background-color: transparent;
+  border: 0;
+  overflow: hidden;
+  /* IE 6/7 fallback */
+
+  *text-indent: -9999px;
+}
+.ir:before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 150%;
+}
+/*
+ * Hide from both screenreaders and browsers: h5bp.com/u
+ */
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+/*
+ * Hide visually and from screenreaders, but maintain layout
+ */
+.invisible {
+  visibility: hidden;
+}
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.clearfix:after {
+  clear: both;
+}
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.clearfix {
+  *zoom: 1;
+}
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+@media print {
+  * {
+    background: transparent !important;
+    color: #000000 !important;
+    /* Black prints faster: h5bp.com/s */
+  
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  /*
+       * Don't show links for images, or javascript/internal links
+       */
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  thead {
+    display: table-header-group;
+    /* h5bp.com/t */
+  
+  }
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+  img {
+    max-width: 100% !important;
+  }
+  @page  {
+    margin: 0.5cm;
+  }
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}

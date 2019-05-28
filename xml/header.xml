@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<header>
+	<external>
+		<button>
+			<text>Inicio</text>
+			<url></url>
+			<type>home</type>
+		</button>
+		<button>
+			<text>F5 Escaz&amp;uacute</text>
+			<url>escazu/1/reservaciones</url>
+			<type></type>
+		</button>
+		<button>
+			<text>F5 Desamparados</text>
+			<url>desamparados/1/reservaciones</url>
+			<type></type>
+		</button>
+	</external>
+	<internal>
+		<button>
+			<text>Inicio</text>
+			<url></url>
+			<type>home</type>
+		</button>
+		<button>
+			<text>Reservaciones</text>
+			<url>/1/reservaciones</url>
+			<type>reservaciones</type>
+		</button>
+		<button>
+			<text>Galer&amp;iacute;a</text>
+			<url>/galeria</url>
+			<type>galeria</type>
+		</button>
+	</internal>
+	<error>
+		<button>
+			<text>Inicio</text>
+			<url></url>
+			<type>home</type>
+		</button>
+		<button>
+			<text>Galer&amp;iacute;a</text>
+			<url>/galeria</url>
+			<type>galeria</type>
+		</button>
+	</error>
+</header>

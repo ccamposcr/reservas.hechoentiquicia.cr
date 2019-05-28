@@ -1,0 +1,1415 @@
+/*! HTML5 Boilerplate v4.3.0 | MIT License | http://h5bp.com/ */
+
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+}
+
+html {
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Remove the gap between images, videos, audio and canvas and the bottom of
+ * their containers: h5bp.com/i/440
+ */
+
+audio,
+canvas,
+img,
+video {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+/* ==========================================================================
+   Browse Happy prompt
+   ========================================================================== */
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: @black;
+    padding: 0.2em 0;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+/* Color Variables */
+
+@black: #000;
+@white: #fff;
+@red: #C4302C;
+@orange: #FF5500;
+@blueFacebook: #3B5A99;
+@blueLightTwitter: #009FD1;
+@lightOrange:#F4753D;
+@gray:#968E8E;
+@darkGray:#3A3333;
+@lightGray:#D2CFCF;
+
+/* Fonts Variables */
+@font-content:'eurostileregular';
+@font-Titles:'nakamuraregular';
+
+/* ==========================================================================
+   LOADER
+========================================================================== */
+.loading{
+    .modal-body{
+        img{
+            margin: 0 auto;
+            display: block;
+        }
+        
+        p{
+            text-align: center;
+        }
+    }
+}
+
+#loading-modal{
+    display: block;
+    opacity: 1;
+}
+
+.capitalize-text{
+    text-transform: capitalize;
+}
+
+/* ==========================================================================
+   MODAL
+========================================================================== */
+.modal-header{
+    background-color: @darkGray;
+    padding: 10px 15px 5px;
+
+    button{
+
+        span{
+            color: @white;
+        }
+    }
+
+    h4{
+        font-family: @font-content;
+        color: @white;
+        font-size: 20px;
+    }
+}
+
+.modal-body{
+    margin-top: 0;
+    padding-top: 6px;
+    font-family: @font-content;
+
+    h3{
+        font-weight: bold;
+    }
+
+    ol{
+        font-size: 17px;
+        font-weight: normal;
+
+        dt{
+            font-weight: normal;
+        }
+    }
+}
+
+#bookingOnLine{
+    dl{
+        margin-top: 0;
+        margin-bottom: 0;
+
+        dt{
+            margin-bottom: 5px;
+
+            .selectUserBtn{
+                margin-left: 259px;
+            }
+        }
+
+        dd.contentInfoForm{
+            margin:0;
+
+            label{
+                width: 75px;
+                margin-left: 15px;
+            } 
+
+            input{
+                display: inline-block;
+                width: 450px;
+                margin-bottom: 8px;
+            }
+        }
+    }
+
+    .error{
+        color: @red;
+        margin-left: 95px;
+        display: block;
+    }
+
+    .checkbox{
+        dl{
+            margin-bottom: 0;
+        }
+
+        button{
+            margin-left: -41px;
+        }
+    }
+}
+
+#carDataForm{
+    display: none;
+
+    dl{
+        dd.contentInfoForm{
+            label{
+                width: 95px;
+            }
+
+            input.input_ccv{
+                width: 60px;
+            }
+
+            input.input_number{
+                width: 202px;
+            }
+
+            select{
+                width: 202px;
+                height: 30px;
+                display: inline-block;
+                margin-bottom: 8px;
+            }
+
+            &.paymentInformation{
+                padding-left: 15px;
+                margin-bottom: 25px;
+            }
+        }
+    }
+
+    .error{
+        margin-left: 115px;
+    }
+}
+
+.modal-footer{
+    background-color: @darkGray;
+    padding: 10px; 
+
+    button{
+        background-color: @red;
+        color: @white;
+    }
+
+    .reserveBtn[disabled]{
+        background-color: @lightGray;
+    }
+}
+
+#formReservationModal{
+
+    .modal-header{
+
+        h4{
+            float: left;
+
+            > span{
+                font-size: 14px;
+            }
+
+        }
+
+        p{
+            float: right;
+            color: @white;
+            margin: 0;
+        }
+    }
+
+    .modal-body {
+        padding-bottom: 0;
+    }
+
+    .paymentInformation{
+        padding-left: 15px;
+        margin-bottom: 25px;
+        
+        h4{
+            font-weight: bold;
+        }
+
+        table{
+            tr{
+                &.total{
+                    font-weight: bold;
+                }
+
+                th{
+                    width: 150px;
+                }
+
+                td{
+                    border: 1px solid @darkGray;
+                    padding:5px; 
+                }
+            }
+        }
+    }
+}
+
+//change-password
+
+#edit-account-modal{
+
+    .modal-body{
+        padding-bottom:10px; 
+    }
+
+    form{
+        label{
+            width: 180px;
+            font-size: 16px;
+        }
+
+        input{
+            width: 300px;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .error{
+            color:@red;
+            display:block;
+            margin-left: 180px;
+        }
+
+        .userAccountToEdit{
+            display: inline-block;
+            width: 52%;
+            font-size: 16px;
+        }
+    }
+    
+    .changePasswordBtn[disabled]{
+        background-color: @lightGray;
+    }
+}
+
+// search-modal
+
+#search-modal{
+
+    .modal-body{
+        height: 360px;
+        overflow: auto;
+    }
+
+    input.searchInput{
+        border-radius: 5px;
+        padding: 6px;
+        margin-bottom: 15px;
+        width: 300px;
+    }
+
+    input.client{
+        text-align: center;
+        margin: 0 auto;
+        display: block;
+    }
+
+    table{
+
+        tr{
+            border-bottom: 1px solid @lightGray;
+
+            th{
+                width: 180px;
+                font-size: 16px;
+                color: @red;
+            }
+        }
+    }
+
+    .client_info{
+        padding: 3px;
+    }
+}
+
+#check-availability-modal{
+
+    text-align: left;
+
+    .modal-body{
+        height: 360px;
+        overflow: auto;
+
+        span{
+            width: 136px;
+            display: -webkit-inline-box;
+            margin: 5px 10px;
+            border-bottom: 1px solid @lightGray;
+        }
+    }
+
+    .busy{
+        background-color:@red;
+        color:@white;
+    }
+}
+
+//show-info-modal
+#show-info-modal{
+
+    .modal-body{
+        label{
+            width: 150px;
+            font-size: 15px;
+        }
+
+        button{
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        .pitchInformation {
+            color: @red;
+            margin-top: 10px;
+
+            p{
+                margin: 0;
+                font-weight: bold;
+                margin-bottom: 22px;
+                font-size: 16px;
+            }
+
+            input[type="checkbox"]{
+                width: 15px;
+                height: 15px;
+                position: relative;
+                top: 4px;
+                margin-right: 10px;
+            }
+
+            span{
+                font-weight: bold;
+            }
+        }
+    }
+
+     .error{
+        display: block;
+        margin-left: 154px;
+        color: @red;
+    }
+}
+
+#show-accounts-modal{
+    table{
+
+        tr{
+            border-bottom: 1px solid @lightGray;
+
+            th{
+                width: 180px;
+                font-size: 16px;
+                color: @red;
+            }
+        }
+    }
+
+    .client_info{
+        padding: 3px;
+    }
+}
+
+#edit-rates-modal{
+    table{
+        tr{
+            td{
+                padding-top: 5px;
+                padding-bottom: 5px;
+
+                input{
+                    width: 85%;
+                }
+            }
+        }
+    }
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+
+#divWrapperHeader{
+    width: 100%;
+    height: 84px;
+    background-color: rgba(19, 18, 18, 0.76);
+    margin-top: 20px;
+}
+
+#divContentHeader{
+    width: 960px;
+    margin: 0 auto;
+
+    span{
+        text-decoration: none;
+        color: @white;
+        float: left;
+        position: absolute;
+        margin: -6px 0 0 70px;
+        text-transform: capitalize;
+        font-size: 14px;
+        font-family: @font-content;
+    }
+}
+
+#mainNav{
+    display: block;
+    float: right;
+    padding: 0;
+    margin: 0;
+}
+
+#mainNav li{ 
+    width: 150px;
+    height: 84px;
+    list-style: none;
+    float: left;
+    text-align: center;
+    font-family: @font-content;
+    font-size: 16px;
+    line-height: 84px;
+
+    a{
+        text-decoration: none;
+        color: white;
+        display: block;
+
+        &:hover{
+            background-color: @red;
+        }
+
+        &.active{
+            background-color:@red;
+        }
+    }
+
+    &.active{
+       background-color: @red; 
+    }
+}
+
+#logo{
+    float: left;
+    margin: 6px 0 0 14px;
+
+    a{
+        display: block;
+    }
+}
+
+
+
+
+/* ==========================================================================
+   HOME CONTENT
+   ========================================================================== */
+#divContent{
+    width: 960px;
+    padding: 40px;
+    background-color:rgba(2, 2, 2, 0.29); 
+    margin:18px auto;
+    //min-height: 930px;
+
+    h1,h2{
+        color:white;
+        text-align: center;
+        font-family: @font-Titles;
+        font-size: 25px;
+        margin: 0;
+        letter-spacing: 3px;
+    }
+
+    h2{
+        color: @red;
+        font-size: 19px;
+        text-align: center;
+        text-shadow: 1px 0 0 #240404;
+        margin-bottom: 40px;
+        letter-spacing: 3px;
+
+        span{
+            font-family: arial;
+            font-size: 25px;
+            font-weight: 800;
+        }
+    }
+
+    p{
+        color:white;
+        font-family: @font-content;
+        font-size: 19px;
+        margin: 40px 0; 
+        line-height: 24px; 
+    }
+}
+
+#divContentButtons{
+    margin-bottom: 6px;
+}
+
+#goEscazuSiteBtn, #goDesamparadosSiteBtn{
+    width: 260px;
+    height: 100px;
+    border-radius: 5px;
+    background-color: @orange;
+    padding: 10px;
+
+    a{
+       display: block;
+       margin: 0 auto; 
+    }
+
+    img{
+        display: block;
+        margin: 0 auto;
+    }
+
+    &:hover{
+        background-color: @white;
+    }
+}
+
+#goEscazuSiteBtn{
+    float: left;
+    margin-left: 90px;
+}
+
+#goDesamparadosSiteBtn{
+    float: right;
+    margin-right: 90px; 
+}
+
+/* ==========================================================================
+   CALENDAR
+========================================================================== */
+#calendar {
+    display: block;
+    font-family: @font-content;
+    color: @white;
+    position: absolute;
+
+    table{
+        margin-top: 37px;
+        font-size: 16px;
+        width: 200px;
+            
+        .days_row{
+            display: none;
+            background:@white;
+            color:@darkGray;
+            padding: 3px;
+
+            .day{
+                cursor: pointer;
+
+                div{
+                    padding: 5px;
+                }
+
+                &:hover{
+                    background:@gray;
+                }
+
+                .active{
+                    background: @red;
+                }
+
+                .today{
+                    background: @orange;
+                }
+            }
+        }
+
+        .days_head{
+            display: none;
+            color:@red;
+            background:@white;
+            text-align: center;
+        }
+    }
+}
+
+#currentDate{
+    text-align: center;
+}
+// buttons to choose the pitch
+#pitchs{
+
+    float: right;
+    display: none;
+
+    ul{
+        list-style-type: none;
+
+        li{
+            float: left;
+            margin-left: 10px;
+            a{
+                color: @white;
+                display: block;
+                background-color: @gray;
+                font-family: @font-content;
+                font-size: 14px;
+                text-align: center;
+                line-height: 20px;
+                padding: 5px 25px;
+                text-decoration: none;
+                margin-top: 20px;
+
+                &:hover, &.active{
+                    background-color: @red;
+                }
+            }
+        }
+    }
+}
+
+/* ==========================================================================
+   RESERVACIONES
+========================================================================== */
+
+#dailyResevations{
+    display: none;
+    width: 100%;
+    margin: 0 auto;
+    color: @white;
+    // padding: 0;
+    float: left;
+
+    #timeAndTeamInfo{
+        display: block;
+        padding: 0;
+
+        li{
+            float: left;
+            list-style: none;
+            font-family: @font-content;
+            font-size: 18px;
+
+            &:nth-child(1){
+                width: 100px;
+            }
+
+            &:nth-child(2), &:nth-child(3){
+                width: 387px;
+                text-align: center;
+            }
+        }
+    }
+
+    #reservations{
+        list-style-type: none;
+        padding: 0;
+        margin-left: 15px;
+
+        li.row > span{
+            display: block;
+            float: left;
+            width: 387px;
+            height: 33px;
+            text-align: center;
+            &:not(.reservation-time){
+                text-transform: capitalize;
+            }
+
+            &.blocked{
+                background-color: @red;
+                border:solid 1px @darkGray;
+                margin:2px;
+                line-height: 30px;
+            }
+
+            &.reservation-time{
+                border: none;
+                width: 100px;
+                color:@white ;
+                font-family: @font-content;
+                text-align: left;
+                line-height: 40px;
+                font-size: 16px;
+            }
+
+            &.completa{
+                width: 777px;
+                color: @white;
+                border:1px solid @darkGray;
+                line-height: 30px;
+            }
+
+            &.available{
+                cursor: pointer;
+                background-color: @lightOrange;
+                border:solid 1px @darkGray;
+                margin:2px;
+                line-height: 30px;
+            }
+
+            &.locked{
+                background-color: @gray;
+                border:solid 1px @darkGray;
+                margin:2px;
+                line-height: 30px;
+            }
+
+            &.delete.active{
+                background-color: @black;
+                border:solid 1px @red;
+                margin:2px;
+                line-height: 30px;
+            }
+
+            &.showInfo{
+                cursor: pointer;
+            }
+        }
+    }
+
+    .active{
+        font-weight: bold;
+    }
+}
+
+#mainWrapper{
+    width: 100%;
+    background: url('../img/main-background.jpg') top center no-repeat;
+    margin: 0 auto;
+    position: relative;
+}
+
+.next, .prev{
+    color: @orange;
+}
+
+.searchBtn{
+    float: left;
+}
+
+/* ==========================================================================
+   LOGIN
+========================================================================== */
+#divContent{
+
+    #loginTitle{
+        font-family: @font-content;
+        font-size: 30px;
+    }
+
+    label{
+        font-family: @font-content;
+        color:@white;
+        font-size: 20px;
+        font-weight: normal;
+    }
+
+    .content-column{
+        width: 50%;
+        float: left;
+
+        &.column-2{
+            padding-left: 45px;
+        }
+
+        .services{
+            li{
+                color: @white;
+                font-family: @font-content;
+                font-size: 19px;
+            }
+        }
+
+        p{
+            margin-bottom: 10px;
+            font-family: @font-content;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+}
+
+#contentLogin{
+    width: 450px;
+    margin: 20px auto;
+
+    p{
+        color:@red;
+        font-size: 23px;
+        font-family: @font-content;
+        font-weight: bold;
+        text-align: center;
+        margin: 5px;
+    }
+
+    #btnLogin{
+        margin-top: 10px;
+    }
+}
+
+#userStatus{
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    width: 960px;
+    text-align: right;
+    top: 0;
+    font-size: 16px;
+    font-family: @font-content;
+
+    a{
+        color: @white;
+        text-decoration: none;
+        margin: 0 5px;
+
+        &:hover{
+            color: @red;
+        }
+    }
+
+    span{
+        color:@orange;
+        margin: 0 5px;
+    }
+}
+/* ==========================================================================
+   GALLERY
+========================================================================== */
+.divMainContentGallery{
+    
+    .slider{
+        width:650px;
+        height: 450px;
+        margin: 20px  auto 0;
+        border: 5px solid #282626;
+    }
+
+    .flex-direction-nav{
+
+       .flex-prev{
+            background: url(../img/img-previous.png) no-repeat;
+            
+            &:before{
+              display: block;
+              text-indent: 100%;
+              white-space: nowrap;
+              overflow: hidden;
+            }
+        }
+
+       .flex-next{
+            background: url(../img/img-next.png) no-repeat 0 0;
+
+            &:before{
+              display: block;
+              text-indent: 100%;
+              white-space: nowrap;
+              overflow: hidden;
+            }
+        }
+    }
+
+    .slides {
+
+        img{
+            width:650px;
+            height: 440px;
+        }
+    }
+}
+
+.carousel{
+
+    width: 650px;
+    height: 85px;
+    margin: 0 auto;
+    margin-top: 10px;
+    background-color: rgba(0, 0, 0, 0.25);
+    border:none;
+
+    .slides {
+
+        img{
+            width: 120px;
+            height: 85px;
+        }
+    }
+}
+
+.album-header{
+    color: @white;
+}
+
+.album-header:hover{
+    color: @black;
+}
+
+/* ==========================================================================
+   FOOTER 
+   ========================================================================== */
+#divWrapperFooter{
+    width: 100%;
+    background: url(../img/footer-background.jpg) center center repeat;
+    padding-top: 10px;
+}
+
+#divContentFooter{
+    width: 960px;
+    margin: 0 auto;
+    padding: 10px 25px;
+    border-top: 1px solid rgba(11, 11, 11, 0.3);
+}
+
+//social icons
+#divSocialsIcons{
+    //width: 210px;
+    margin: 0px auto;
+    display:table;
+
+    a.fa-facebook, a.fa-twitter, a.fa-youtube{
+        height: 40px;
+        width: 40px;
+        border-radius: 100px;
+        float: left;
+        margin:20px 10px;
+        text-decoration: none;
+        display: block;
+        font-size: 25px;
+        color: @white;
+        text-align: center;
+        line-height: 39px;
+
+        &:hover{
+            text-decoration: none;
+        }
+    }
+}
+
+a.fa-facebook{
+    background-color: @blueFacebook;
+
+    &:hover{
+        background-color: @gray;
+    }
+}
+
+a.fa-twitter{
+    background-color: @blueLightTwitter;
+
+    &:hover{
+        background-color: @gray;
+    }
+}
+
+a.fa-youtube{
+    background-color: @red;
+
+    &:hover{
+        background-color: @gray;
+    }
+}
+
+#copy-right{
+    color: @white;
+    // float: left;
+    font-family: @font-content;
+    font-size: 16px; 
+    margin: 0 auto;
+    display: table;
+    width: 100%;
+    text-align: center;
+}
+
+#siteseal{
+    img{
+        width:15%;
+    }
+    
+}
+/* ==========================================================================
+  INTERNAL FOOTER
+   ========================================================================== */
+#divContentInfoFooter span, #contentSocialIcons span, #infoContact > span{
+    color: @white;
+    font-family: @font-content;
+    font-size: 18px;
+    text-transform: capitalize;
+    height: 160px;
+}
+
+#contentSocialIcons{
+    width: 250px;
+}
+
+#infoContact{
+    width: 240px;
+}
+
+#divContentInfoFooter{
+    width: 400px;
+    float: left;
+
+    p{
+        color: @white;
+        font-family: @font-content;
+        font-size: 16px;
+        text-align: justify;
+    }
+}
+
+.sticky-footer{
+    position: absolute;
+    bottom: 0;
+}
+
+#contentSocialIcons{
+    float: left;
+
+    span{
+        margin-left: 83px;
+    }
+
+    #socialIcons{
+        width: 200px;
+        margin:0 auto;
+    }
+
+    a.fa-facebook, a.fa-twitter, a.fa-youtube{
+        height: 40px;
+        width: 40px;
+        border-radius: 100px;
+        float: left;
+        margin:13px 9px;
+        text-decoration: none;
+        display: block;
+        font-size: 25px;
+        color: @white;
+        text-align: center;
+        line-height: 40px;
+
+        &:hover{
+            text-decoration: none;
+        }
+    }
+
+    a.fa-facebook{
+        margin-left: 85px;
+    }  
+}
+
+#infoContact{
+    float: right;
+    
+    span{
+        margin-left: 40px;
+    }
+
+    ul{
+        padding: 0; 
+        margin-top: 5px;
+
+        li{
+            
+            a{
+                list-style: none;
+                color: @white;
+                font-family: @font-content;
+                font-size: 16px;
+                padding: 0;
+                text-decoration: none;
+                margin-left: 20px;
+                display: inline-block;
+
+                &.phone-2{
+                    margin-left: 80px;
+                    margin-top: 5px;
+                }
+            }
+            
+            span{
+                font-size: 18px;
+                color: @orange;
+                padding: 7px 3px 0 0;
+                margin-left: 40px;
+                width: 20px;
+                img{
+                    width: 10%;
+                    margin: 5px -3px 0 -3px;
+                }
+            }
+        }
+    }
+}
+
+//ERROR PAGE
+
+#divContentErrorPage{
+    padding: 110px 0;
+
+    p{
+        font-family: @font-content;
+        font-size: 30px;
+        color: @white;
+        text-align: center;
+        margin: 0;
+    }
+
+    span{
+        font-family: @font-content;
+        font-size: 20px;
+        color: @white;
+        text-align: center;
+        display: block;
+    }
+}
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Image replacement
+ */
+
+.ir {
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    /* IE 6/7 fallback */
+    *text-indent: -9999px;
+}
+
+.ir:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 150%;
+}
+
+/*
+ * Hide from both screenreaders and browsers: h5bp.com/u
+ */
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+/*
+ * Hide visually and from screenreaders, but maintain layout
+ */
+
+.invisible {
+    visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+    *zoom: 1;
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+
+@media print {
+    * {
+        background: transparent !important;
+        color: @black !important; /* Black prints faster: h5bp.com/s */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links for images, or javascript/internal links
+     */
+
+    .ir a:after,
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group; /* h5bp.com/t */
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
