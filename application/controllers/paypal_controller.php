@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Paypal_controller extends CI_Controller {
+class paypal_controller extends CI_Controller {
     private $host;
     private $client_id;
     private $secret;
