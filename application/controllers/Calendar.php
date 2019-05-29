@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class calendar_controller extends CI_Controller {
+class Calendar extends CI_Controller {
 
     public function __construct()
     {
@@ -59,7 +59,7 @@ class calendar_controller extends CI_Controller {
 
         {table_close}</table>{/table_close}';
         $this->load->library('calendar', $prefs);
-        $this->load->model("api_model");
+        $this->load->model("apim");
     }
 
 
@@ -100,7 +100,7 @@ class calendar_controller extends CI_Controller {
             $rol = $session_data['rol'];
             $groupManager = $session_data['groupManager'];
 
-            if( $this->api_model->getGroup($this->uri->segment(1))[0]->id != $groupManager && $rol == $this->api_model->getIdRol('Dependiente')[0]->id){
+            if( $this->apim->getGroup($this->uri->segment(1))[0]->id != $groupManager && $rol == $this->apim->getIdRol('Dependiente')[0]->id){
                 redirect($this->uri->segment(1) . '/accesoDenegado');
             }
 

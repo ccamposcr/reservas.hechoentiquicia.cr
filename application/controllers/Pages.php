@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class pages_controller extends CI_Controller {
+class Pages extends CI_Controller {
     function __construct() {
         parent::__construct();
     }

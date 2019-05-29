@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class paypal_controller extends CI_Controller {
+class Paypal extends CI_Controller {
     private $host;
     private $client_id;
     private $secret;
@@ -12,7 +12,7 @@ class paypal_controller extends CI_Controller {
         $this->host = 'https://api.sandbox.paypal.com';
         $this->client_id = 'AdB3iRARTpvKZx1jqjubgf8A3sOuAU2m8BVed7tD7cQ_0XD6EThMbjDlw8J9';
         $this->secret = 'EOUlnRASDZY8kDAikr1-gPMjTLCbQJ9YP9DTEIYypqy9MsVCg5Q0fKY8bvKz';
-        $this->load->model("api_model");
+        $this->load->model("apim");
     }
  
     function get_access_token() {
@@ -71,7 +71,7 @@ class paypal_controller extends CI_Controller {
         $reservation_day = ( isset($_POST['reservation_day']) ) ? strip_tags($_POST['reservation_day']) : date("d", time());
 
         /* -- Specific Rates -- */
-        $rates = $this->api_model->getRates();
+        $rates = $this->apim->getRates();
         $date = date('w', strtotime($reservation_year.'-'.$reservation_month.'-'.$reservation_day));
         $isWeekend = ($date == 6 || $date == 0);
         $hourSelected = explode("-",$reservation_time)[0];
