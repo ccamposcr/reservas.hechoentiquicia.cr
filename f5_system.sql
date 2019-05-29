@@ -177,3 +177,7 @@ CREATE TABLE IF NOT EXISTS `t_temporary_schedule` (
   `temporary_date_made` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+/* INSERT TEST ADMIN USER*/
+
+INSERT INTO `t_admin`(`id`, `user`, `password`, `name`, `rol`, `id_group`) VALUES (1,'ccamposcr',MD5('12345'),'Christian',1,1)

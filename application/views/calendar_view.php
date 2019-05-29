@@ -105,7 +105,7 @@
 
                 <div id="bookingByCall" ng-show="bookingType == 'bookingByCall'">
                     <h3>Reservaci&oacute;n por tel&eacute;fono</h3>
-                    <p>Para reservar llame a los siguientes n&uacute;meros: <a href="tel:(506)8376-2121">8376-2121</a> &oacute; <a href="tel:(506)7206-3300">7206-3300</a></p>
+                    <p>Para reservar llame a los siguientes n&uacute;meros: <a href="tel:"></a> &oacute; <a href="tel:"></a></p>
                 </div>
                 <div id="bookingOnLine" ng-show="bookingType == 'bookingOnLine'">
                     <div id="bookingForm">

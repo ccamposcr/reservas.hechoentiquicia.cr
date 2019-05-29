@@ -14,8 +14,8 @@ class Email_controller extends CI_Controller {
         $config['protocol'] = 'smtp';
         //$config['wordwrap'] = TRUE;
         $config['smtp_host'] = 'ssl://smtpout.secureserver.net';
-        $config['smtp_user'] = 'reserva@f5.cr';
-        $config['smtp_pass'] = 'Avega0184';
+        $config['smtp_user'] = 'reserva@hechoentiquicia.cr';
+        $config['smtp_pass'] = '';
         //$config['smtp_pass'] = 'Reserva2014';
         $config['smtp_port'] = '465';
         $config['mailtype'] = 'html';
@@ -28,10 +28,10 @@ class Email_controller extends CI_Controller {
 
         $email = ( isset($_POST['email']) ) ? strip_tags($_POST['email']) : '';
         $data_reservation = ( isset($_POST['data_reservation']) ) ? $_POST['data_reservation'] : '';
-        $this->email->from('reserva@f5.cr', 'Reservaciones F5');
+        $this->email->from('reserva@hechoentiquicia.cr', 'Reservas');
         $this->email->to($email); 
         //$this->email->cc('reserva@f5.cr'); 
-        $this->email->subject('F5 | Su reservación se ha efectuado correctamente');
+        $this->email->subject('HT Digital | Su reservación se ha efectuado correctamente');
         $this->email->message($data_reservation);
         $this->email->send();
         echo $this->email->print_debugger();
@@ -41,8 +41,8 @@ class Email_controller extends CI_Controller {
 
         $config['protocol'] = 'smtp';
         $config['smtp_host'] = 'ssl://smtpout.secureserver.net';
-        $config['smtp_user'] = 'reserva@f5.cr';
-        $config['smtp_pass'] = 'Avega0184';
+        $config['smtp_user'] = 'reserva@hechoentiquicia.cr';
+        $config['smtp_pass'] = '';
         //$config['smtp_pass'] = 'Reserva2014';
         $config['smtp_port'] = '465';
         $config['mailtype'] = 'text';
@@ -54,8 +54,8 @@ class Email_controller extends CI_Controller {
 
         $phone = ( isset($_POST['phone']) ) ? strip_tags($_POST['phone']) : '';
         $data_reservation = ( isset($_POST['data_reservation']) ) ? $_POST['data_reservation'] : '';
-        $this->email->from('reserva@f5.cr', 'Reservaciones F5');
-        $this->email->to('dualimentos@tec-sms.com'); 
+        $this->email->from('reserva@hechoentiquicia.cr', 'Reservas');
+        $this->email->to('ccamposcr@gmail.com'); 
         $this->email->subject($phone);
         //$this->email->subject('88308780');
         $this->email->message($data_reservation);
