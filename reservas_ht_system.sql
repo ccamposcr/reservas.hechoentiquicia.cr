@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 -- Database: `f5_system`
 --
 
-CREATE DATABASE IF NOT EXISTS f5_system;
+CREATE DATABASE IF NOT EXISTS reservas_ht_system;
 
 -- --------------------------------------------------------
 
