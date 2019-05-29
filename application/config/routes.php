@@ -56,25 +56,25 @@ $route['translate_uri_dashes'] = FALSE;
 
 //Reservaciones Routes
 
-//Desamparados
-$route['desamparados/(:num)/reservaciones'] = 'calendar_controller/calendar/';
-$route['desamparados/(:num)/reservaciones/(:num)/(:any)'] = 'calendar_controller/calendar/$2/$3';
+//complejo2
+$route['complejo2/(:num)/reservaciones'] = 'calendar_controller/calendar/';
+$route['complejo2/(:num)/reservaciones/(:num)/(:any)'] = 'calendar_controller/calendar/$2/$3';
 
-//Escazu
-$route['escazu/(:num)/reservaciones'] = 'calendar_controller/calendar/';
-$route['escazu/(:num)/reservaciones/(:num)/(:any)'] = 'calendar_controller/calendar/$2/$3';
+//complejo1
+$route['complejo1/(:num)/reservaciones'] = 'calendar_controller/calendar/';
+$route['complejo1/(:num)/reservaciones/(:num)/(:any)'] = 'calendar_controller/calendar/$2/$3';
 
 /*  ------------------------------------------------------------------ */
 
 //Admin Routes
 
-//Desamparados
-$route['desamparados/(:num)/admin'] = 'calendar_controller/admin/';
-$route['desamparados/(:num)/admin/(:num)/(:any)'] = 'calendar_controller/admin/$2/$3';
+//complejo2
+$route['complejo2/(:num)/admin'] = 'calendar_controller/admin/';
+$route['complejo2/(:num)/admin/(:num)/(:any)'] = 'calendar_controller/admin/$2/$3';
 
-//Escazu
-$route['escazu/(:num)/admin'] = 'calendar_controller/admin/';
-$route['escazu/(:num)/admin/(:num)/(:any)'] = 'calendar_controller/admin/$2/$3';
+//complejo1
+$route['complejo1/(:num)/admin'] = 'calendar_controller/admin/';
+$route['complejo1/(:num)/admin/(:num)/(:any)'] = 'calendar_controller/admin/$2/$3';
 
 /* ------------------------------------------------------------------- */
 
@@ -111,7 +111,5 @@ $route['(:any)/verifyLogin'] = 'login_controller/verify';
 
 /* ------------------------------------------------------------------- */
 //Pages Routes
-$route['escazu/galeria'] = 'pages_controller/escazu_gallery';
-$route['desamparados/galeria'] = 'pages_controller/desamparados_gallery';
 $route['(:any)/accesoDenegado'] = 'pages_controller/access_denied';
 $route['logout'] = 'admin_controller/logout';

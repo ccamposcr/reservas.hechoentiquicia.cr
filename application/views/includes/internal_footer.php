@@ -9,7 +9,7 @@
 		    	<div id="contentSocialIcons" class="clearfix">
 		    		<span>S&iacute;guenos en:</span>
 		    		<div id="socialIcons">
-			            <a target="_blank" href="https://www.facebook.com/f5costarica" class="fa fa-facebook"></a>
+			            <!--<a target="_blank" href="https://www.facebook.com/f5costarica" class="fa fa-facebook"></a>-->
 			            <!--<a href="#" class="fa fa-twitter"></a>
 			            <a href="#" class="fa fa-youtube"></a>-->  
 			        </div>	     
@@ -27,7 +27,7 @@
 		            
 			    </div>
 
-		        <p id="copy-right">©2015 Canchas de F&uacute;tbol F5</p>
+		        <p id="copy-right">©2019 HT Digital | Hecho en Tiquicia</p>
 		        <span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=cMzcYREMtupIS3ZxQa3zaq8M3sZ6FgK8xmOFZDbVVjvuzPXaBzvWXXHmV5Kx"></script></span>
 		    </div>
 		</div>

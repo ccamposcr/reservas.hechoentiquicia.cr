@@ -79,12 +79,12 @@ class Calendar_controller extends CI_Controller {
             $footerOptions = simplexml_load_file("xml/footer.xml");
 
             switch ( $this->uri->segment(1) ) {
-                case 'escazu':
-                    $footerOptions = $footerOptions->escazu;
+                case 'complejo1':
+                    $footerOptions = $footerOptions->complejo1;
                     break;
                 
-               case 'desamparados':
-                    $footerOptions = $footerOptions->desamparados;
+               case 'complejo2':
+                    $footerOptions = $footerOptions->complejo2;
                     break;
             }
 
@@ -115,12 +115,12 @@ class Calendar_controller extends CI_Controller {
             $footerOptions = simplexml_load_file("xml/footer.xml");
 
             switch ( $this->uri->segment(1) ) {
-                case 'escazu':
-                    $footerOptions = $footerOptions->escazu;
+                case 'complejo1':
+                    $footerOptions = $footerOptions->complejo1;
                     break;
                 
-               case 'desamparados':
-                    $footerOptions = $footerOptions->desamparados;
+               case 'complejo2':
+                    $footerOptions = $footerOptions->complejo2;
                     break;
             }
 

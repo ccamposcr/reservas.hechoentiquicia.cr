@@ -38,7 +38,7 @@ class Api_controller extends CI_Controller {
     }
 
     public function getGroup(){
-        $group_name = ( isset($_POST['group_name']) ) ? strip_tags($_POST['group_name']) : 'escazu';
+        $group_name = ( isset($_POST['group_name']) ) ? strip_tags($_POST['group_name']) : 'complejo1';
         $id_group = $this->api_model->getGroup($group_name);
         echo json_encode($id_group);
     }

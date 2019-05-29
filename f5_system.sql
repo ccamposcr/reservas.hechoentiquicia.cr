@@ -55,8 +55,8 @@ CREATE TABLE IF NOT EXISTS `t_groups` (
 --
 
 INSERT INTO `t_groups` (`id`, `group_name`) VALUES
-(1, 'Escazu'),
-(2, 'Desamparados');
+(1, 'complejo1'),
+(2, 'complejo2');
 
 -- --------------------------------------------------------
 
@@ -78,8 +78,8 @@ CREATE TABLE IF NOT EXISTS `t_pitchs` (
 --
 
 INSERT INTO `t_pitchs` (`id`, `detail`, `id_group`, `id_pitch`, `active`) VALUES
-(1, 'Escazu 1', 1, 1, 1),
-(2, 'Desamparados 1', 2, 1, 1);
+(1, 'complejo1', 1, 1, 1),
+(2, 'complejo2', 2, 1, 1);
 
 -- --------------------------------------------------------
 

@@ -18,24 +18,6 @@ class Pages_controller extends CI_Controller {
         $this->load->view('includes/footer');
     }
 
-    function escazu_gallery(){
-        $headerOptions = simplexml_load_file("xml/header.xml");
-        $this->load->view('includes/header', $headerOptions->internal);
-    	$this->load->view('escazu_gallery_view');
-
-        $footerOptions = simplexml_load_file("xml/footer.xml");
-        $this->load->view('includes/internal_footer', $footerOptions->escazu);
-    }
-
-    function desamparados_gallery(){
-        $headerOptions = simplexml_load_file("xml/header.xml");
-        $this->load->view('includes/header', $headerOptions->internal);
-    	$this->load->view('desamparados_gallery_view');
-
-        $footerOptions = simplexml_load_file("xml/footer.xml");
-        $this->load->view('includes/internal_footer', $footerOptions->desamparados);
-    }
-
     function page_404(){
         $headerOptions = simplexml_load_file("xml/header.xml");
         $this->load->view('includes/header', $headerOptions->error);
