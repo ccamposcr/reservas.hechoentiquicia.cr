@@ -13,18 +13,18 @@ var gulp         = require('gulp'),
     uglify       = require('gulp-uglify'),
     jsBuildVars  = {
                       'util': {
-                        src: './src/clientlibs/js/util/index.js',
-                        dest: './dist/clientlibs/js/',
+                        src: './js/util/index.js',
+                        dest: './js/',
                         rename: 'util.js'
                       },
                       'components': {
-                        src: './src/clientlibs/js/components/index.js',
-                        dest: './dist/clientlibs/js/',
+                        src: './js/components/index.js',
+                        dest: './js/',
                         rename: 'components.js'
                       },
                       'vendor': {
-                        src: './src/clientlibs/js/vendor/index.js',
-                        dest: './dist/clientlibs/js/',
+                        src: './js/vendor/index.js',
+                        dest: './js/',
                         rename: 'vendor.js'
                       }
                     };
@@ -44,29 +44,13 @@ var executeTaskAndReload = function(args){
   return executeTask(args);
 }
 
-// Static server
-var server = function() {
-  browserSync.init({
-    server: './dist'
-  });
-
-  //watch for changes on jade, scss js and images
-  watch('./src/**/**/*.jade', executeTaskAndReload.bind(null, ['html']));
-  watch('./src/clientlibs/scss/**/**/*.scss', executeTaskAndReload.bind(null, ['sass']));
-  watch(['./src/clientlibs/js/**/**/*.js'], executeTaskAndReload.bind(null, ['js_util','js_vendor','js_components']));
+// Watch
+var watch = function() {
+  //watch for changes on scss js
+  watch('./scss/**/**/*.scss', executeTaskAndReload.bind(null, ['sass']));
+  watch(['./js/**/**/*.js'], executeTaskAndReload.bind(null, ['js_util','js_vendor','js_components']));
 };
 
-var html_build = function () {
-
-  var pretty = true;
-  var jadeVars = {};
-
-  return gulp
-          .src( './src/*.jade' )
-          .pipe( debug({title: 'jade'}))
-          .pipe( jade( {"pretty":pretty, "locals": jadeVars } ) )
-          .pipe( gulp.dest( "./dist" ) );
-};
 
 var sass_task = function() {
   return gulp
@@ -102,7 +86,7 @@ var js_util_build       = getJSBuild('util'),
 
 
 var lint = function() {
-  var filesToLint = ['./src/clientlibs/js/**/*.js'];
+  var filesToLint = ['./js/**/*.js'];
   
   return gulp
             .src(filesToLint)
@@ -112,15 +96,13 @@ var lint = function() {
             // .pipe(eslint.failOnError());
 };
 
-
+gulp.task('reloadBrowsers', reloadBrowsers);
 gulp.task('sass', sass_task );
 gulp.task('js_util', js_util_build );
 gulp.task('js_vendor', js_vendor_build );
 gulp.task('js_components', js_components_build );
 gulp.task('lint', lint );
-gulp.task('server', server);
-gulp.task('reloadBrowsers', reloadBrowsers);
-gulp.task('html', html_build);
+gulp.task('watch', watch);
 
-gulp.task('build', [/*'js_util', 'js_vendor', 'js_components',*/ 'sass'/*, 'html'*/] );
-gulp.task('default', ['build','server']);
+gulp.task('build', ['js_util', 'js_vendor', 'js_components', 'sass'] );
+gulp.task('default', ['build','watch']);

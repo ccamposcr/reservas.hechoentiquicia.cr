@@ -12,6 +12,7 @@
 	</div>
 
 	<script src="<?php echo base_url(); ?>js/vendor/vue.js"></script>
+	<script src="<?php echo base_url(); ?>js/components.js"></script>
 	<!--<script src="<?php echo base_url(); ?>js/vendor/jquery-1.10.2.min.js"></script>-->
 	<!--<script src="<?php echo base_url(); ?>js/vendor/angular.min.js"></script>-->
     <!--<script src="<?php echo base_url(); ?>js/app/shared/app.js"></script>-->
