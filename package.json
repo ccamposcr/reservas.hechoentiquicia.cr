@@ -1,0 +1,39 @@
+{
+  "name": "reservas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gulp-build": "./node_modules/.bin/gulp",
+    "gulp-dev": "./node_modules/.bin/gulp",
+    "gulp-prod": "./node_modules/.bin/gulp --env PROD",
+    "gulp-build-deploy": "./node_modules/.bin/gulp --env PROD",
+    "gulp-watch": "./node_modules/.bin/gulp watch",
+    "gulp-server": "./node_modules/.bin/gulp server"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [],
+  "author": "Christian Campos <ccamposcr@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-debug": "^4.0.0",
+    "gulp-eslint": "^5.0.0",
+    "gulp-include": "^2.4.1",
+    "gulp-jade": "^1.1.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.2",
+    "gulp-watch": "^5.0.1",
+    "node-sass": "^4.11.0",
+    "run-sequence": "^2.2.1"
+  },
+  "dependencies": {}
+}

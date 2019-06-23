@@ -1,0 +1,13 @@
+/**Import vendor files here**/
+@import 'vendor/bootstrap.min';
+@import 'vendor/normalize';
+
+/**Global files**/
+@import '_fonts.scss';
+@import 'mixins/_media_queries.scss';
+@import '_variables.scss';
+@import '_global.scss';
+
+
+/**Import components files here**/
+@import 'components/_components';

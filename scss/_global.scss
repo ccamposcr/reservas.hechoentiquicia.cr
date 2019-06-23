@@ -1,0 +1,26 @@
+.full_width{
+	margin-left: -15px;
+	margin-right: -15px;
+}
+
+a{
+	font-size: rem(16);
+	font-weight: 300;
+}
+
+h1,
+h2,
+h3,
+h4,
+p{
+	color: $color--white;
+}
+
+body{
+	font-family: 'Roboto', sans-serif;
+}
+
+body,
+html{
+	height: 100%;
+}

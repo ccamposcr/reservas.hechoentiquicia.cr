@@ -10,36 +10,9 @@
         <meta name="description" content="">
         <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
 
-        <link rel="stylesheet" href="<?php echo base_url(); ?>css/fonts.css"/>
-        <link rel="stylesheet" href="<?php echo base_url(); ?>css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="<?php echo base_url(); ?>css/normalize.css">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/flexslider.css" />
-        <script src="<?php echo base_url(); ?>js/vendor/modernizr-2.6.2.min.js"></script>
 
-        <?php if( $this->config->item('development') ){?>
-        <link rel="stylesheet/less" type="text/css" href="<?php echo base_url(); ?>css/style.less" />
-        <script>
-          less = {
-            env: "development",
-            async: false,
-            fileAsync: false,
-            poll: 1000,
-            functions: {},
-            dumpLineNumbers: "comments",
-            relativeUrls: false,
-            rootpath: ":/a.com/"
-          };
-        </script>
-        <script src="<?php echo base_url(); ?>js/vendor/less.js"></script>
-        <?php
-        }
-        else{ 
-        ?>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/style.css" />
-        <?php
-        }
-        ?>
-        
+        <script src="<?php echo base_url(); ?>js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
 
     <body ng-app="F5App">
