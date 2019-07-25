@@ -1,4 +1,4 @@
-F5App.app.controller("reservationController", ['$scope','$rootScope','$timeout','$http',function ($scope, $rootScope,$timeout,$http){
+App.getAppInstance().controller("reservationController", ['$scope','$rootScope','$timeout','$http',function ($scope, $rootScope,$timeout,$http){
    $scope.timesForReservations = ['08-09','09-10','10-11','11-12','12-13','13-14','14-15','15-16','16-17','17-18','18-19','19-20','20-21','21-22','22-23','23-24'];
    $scope.times = ['08:00 a.m.','09:00 a.m.','10:00 a.m.','11:00 a.m.','12:00 m.d','01:00 p.m.','02:00 p.m.','03:00 p.m.','04:00 p.m.','05:00 p.m.','06:00 p.m.','07:00 p.m.','08:00 p.m.','09:00 p.m.','10:00 p.m.','11:00 p.m.'];
 	//var path = ( window.location.pathname.replace('/','').replace(/\/$/, '').split('/').length <= 2 ) ? './' : '../';
@@ -27,7 +27,7 @@ F5App.app.controller("reservationController", ['$scope','$rootScope','$timeout',
 
 		var req = {
 			method: 'POST',
-			url: F5App.base_url + "getReservationByDay",
+			url: App.getBaseURL() + "getReservationByDay",
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
@@ -52,7 +52,7 @@ F5App.app.controller("reservationController", ['$scope','$rootScope','$timeout',
 
 		var req = {
 			method: 'POST',
-			url: F5App.base_url + "getPitchByGroup",
+			url: App.getBaseURL() + "getPitchByGroup",
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
@@ -114,7 +114,7 @@ F5App.app.controller("reservationController", ['$scope','$rootScope','$timeout',
 
 			type: 'POST',
 
-			url : F5App.base_url + "getGroup",
+			url : App.getBaseURL() + "getGroup",
 
 			data: { group_name: angular.element('#group').val() || window.location.pathname.replace('/','').replace(/\/$/, '').split('/')[1] },
 
@@ -160,7 +160,7 @@ F5App.app.controller("reservationController", ['$scope','$rootScope','$timeout',
 
 		var req = {
 			method: 'POST',
-			url: F5App.base_url + "setTemporaryReservationState",
+			url: App.getBaseURL() + "setTemporaryReservationState",
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
@@ -179,7 +179,7 @@ F5App.app.controller("reservationController", ['$scope','$rootScope','$timeout',
 
 			type: 'POST',
 
-			url : F5App.base_url + "getDateFromServer",
+			url : App.getBaseURL() + "getDateFromServer",
 
 			async : false,
 
@@ -194,7 +194,7 @@ F5App.app.controller("reservationController", ['$scope','$rootScope','$timeout',
 	$rootScope.getRates = function(){
 		var req = {
 			method: 'POST',
-			url: F5App.base_url + "getRates",
+			url: App.getBaseURL() + "getRates",
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
@@ -255,7 +255,7 @@ F5App.app.controller("reservationController", ['$scope','$rootScope','$timeout',
 		angular.element('#sending-email-modal').modal('show');
 		var req = {
 			method: 'POST',
-			url: F5App.base_url + "sendEmail",
+			url: App.getBaseURL() + "sendEmail",
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
@@ -278,7 +278,7 @@ F5App.app.controller("reservationController", ['$scope','$rootScope','$timeout',
 		angular.element('#sending-sms-modal').modal('show');
 		var req = {
 			method: 'POST',
-			url: F5App.base_url + "sendSMS",
+			url: App.getBaseURL() + "sendSMS",
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
@@ -303,7 +303,7 @@ F5App.app.controller("reservationController", ['$scope','$rootScope','$timeout',
 
 
 	angular.element(window).bind("beforeunload", function(e) { 
-		if( (/admin/.test(location.href) || /reservaciones/.test(location.href)) && !F5App.leaveSafelyPage ){
+		if( (/admin/.test(location.href) || /reservaciones/.test(location.href)) && !App.getLeavePageConfirmation() ){
 		    var data = $rootScope.getDataForTemporaryReservation();
 			data.state = '3'; 
 			$scope.setStateTemporaryReservation(data);
@@ -338,7 +338,7 @@ F5App.app.controller("reservationController", ['$scope','$rootScope','$timeout',
 
 angular.element(document).ready(function(){
 	angular.element('body').delegate('a','click', function(){
-		F5App.leaveSafelyPage = true;
+		App.setLeavePageConfirmation(true);
 	});
 
 	angular.element('#calendar .header').on('mouseenter', function(){

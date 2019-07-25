@@ -1,4 +1,4 @@
-F5App.app.controller("headerController", ['$scope','$rootScope',function ($scope, $rootScope){
+App.getAppInstance().controller("headerController", ['$scope','$rootScope',function ($scope, $rootScope){
 
    $scope.setActive = function (){
    		if( !!window.location.href.match('reservaciones') || !!window.location.href.match('admin')){

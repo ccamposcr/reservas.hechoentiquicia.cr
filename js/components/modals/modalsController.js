@@ -1,4 +1,4 @@
-F5App.app.controller("modalController", ['$scope','$rootScope','$interval','$timeout', function ($scope, $rootScope,$interval, $timeout){
+App.getAppInstance().controller("modalController", ['$scope','$rootScope','$interval','$timeout', function ($scope, $rootScope,$interval, $timeout){
 	angular.element('#formReservationModal').on('hidden.bs.modal', function(){
 		
 		if( !$scope.successReservation ){

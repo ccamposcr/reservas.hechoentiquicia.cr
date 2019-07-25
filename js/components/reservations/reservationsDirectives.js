@@ -1,4 +1,4 @@
-F5App.app.directive('loadDay', ['$document', function($document) {
+App.getAppInstance().directive('loadDay', ['$document', function($document) {
     return function(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
@@ -16,7 +16,7 @@ F5App.app.directive('loadDay', ['$document', function($document) {
   }]);
 
 
-F5App.app.directive('available', ['$document','$http','$timeout', function($document,$http,$timeout) {
+App.getAppInstance().directive('available', ['$document','$http','$timeout', function($document,$http,$timeout) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
@@ -41,7 +41,7 @@ F5App.app.directive('available', ['$document','$http','$timeout', function($docu
 
         var req = {
 			method: 'POST',
-			url: F5App.base_url + "getTemporaryReservationState",
+			url: App.getBaseURL() + "getTemporaryReservationState",
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
@@ -111,7 +111,7 @@ F5App.app.directive('available', ['$document','$http','$timeout', function($docu
 	}
   }]);
 
-F5App.app.directive('bookingOnLine', ['$document','$http','$interval', function($document,$http, $interval) {
+App.getAppInstance().directive('bookingOnLine', ['$document','$http','$interval', function($document,$http, $interval) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
@@ -120,7 +120,7 @@ F5App.app.directive('bookingOnLine', ['$document','$http','$interval', function(
 
 		var req = {
 			method: 'POST',
-			url: F5App.base_url + "checkIfReservationExist",
+			url: App.getBaseURL() + "checkIfReservationExist",
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
@@ -161,7 +161,7 @@ F5App.app.directive('bookingOnLine', ['$document','$http','$interval', function(
 			scope.time = '00:'+minutes+':'+seconds;
 
 			if( minutes == 0 && seconds == 0){
-				F5App.leaveSafelyPage = true;
+				App.setLeavePageConfirmation(true);
 				$interval.cancel(scope.timeInterval);
 				location.reload();
 			}
@@ -182,7 +182,7 @@ F5App.app.directive('bookingOnLine', ['$document','$http','$interval', function(
 	}
   }]);
 
-F5App.app.directive('reserveBtn', ['$document','$http','$filter', function($document,$http,$filter) {
+App.getAppInstance().directive('reserveBtn', ['$document','$http','$filter', function($document,$http,$filter) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
@@ -198,7 +198,7 @@ F5App.app.directive('reserveBtn', ['$document','$http','$filter', function($docu
 
 				var req = {
 					method: 'POST',
-					url: F5App.base_url + "createReservation",
+					url: App.getBaseURL() + "createReservation",
 					headers: {
 					   	'Content-Type': 'application/x-www-form-urlencoded'
 					},
@@ -267,7 +267,7 @@ F5App.app.directive('reserveBtn', ['$document','$http','$filter', function($docu
 												+ '<br/>'
 												+ 'Visítanos en nuestro <a href="https://www.facebook.com/f5costarica?fref=ts">Facebook</a>'
 												+ '<br/><br/><br/>'
-												+ '<img src="f5.cr' + F5App.base_url + 'img/logo.png"/>'
+												+ '<img src="f5.cr' + App.getBaseURL() + 'img/logo.png"/>'
 											});
 						}else{
 							angular.element('#loading-modal').modal('hide');
@@ -298,7 +298,7 @@ F5App.app.directive('reserveBtn', ['$document','$http','$filter', function($docu
 
 				var req = {
 					method: 'POST',
-					url: F5App.base_url + "reserveAllWeeksSameDay",
+					url: App.getBaseURL() + "reserveAllWeeksSameDay",
 					headers: {
 					   	'Content-Type': 'application/x-www-form-urlencoded'
 					},
@@ -379,7 +379,7 @@ F5App.app.directive('reserveBtn', ['$document','$http','$filter', function($docu
 									+ '<br/>'
 									+ 'Visítanos en nuestro <a href="https://www.facebook.com/f5costarica?fref=ts">Facebook</a>'
 									+ '<br/><br/><br/>'
-									+ '<img src="f5.cr' + F5App.base_url + 'img/logo.png"/>'
+									+ '<img src="f5.cr' + App.getBaseURL() + 'img/logo.png"/>'
 								});
 					}else{
 						scope.loadReservations();
@@ -407,7 +407,7 @@ F5App.app.directive('reserveBtn', ['$document','$http','$filter', function($docu
 	}
   }]);
 
-F5App.app.directive('showInfo', ['$document','$timeout','$http', function($document,$timeout,$http) {
+App.getAppInstance().directive('showInfo', ['$document','$timeout','$http', function($document,$timeout,$http) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
@@ -418,7 +418,7 @@ F5App.app.directive('showInfo', ['$document','$timeout','$http', function($docum
 
         var req = {
 			method: 'POST',
-			url: F5App.base_url + "getReservationByTime",
+			url: App.getBaseURL() + "getReservationByTime",
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
@@ -446,7 +446,7 @@ F5App.app.directive('showInfo', ['$document','$timeout','$http', function($docum
 	}
   }]);
 
-F5App.app.directive('delete', ['$document','$http', function($document,$http) {
+App.getAppInstance().directive('delete', ['$document','$http', function($document,$http) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
@@ -461,7 +461,7 @@ F5App.app.directive('delete', ['$document','$http', function($document,$http) {
 			if(!scope.fields.deleteAllCccurrences){
 	        	var req = {
 					method: 'POST',
-					url: F5App.base_url + "setInactiveReservation",
+					url: App.getBaseURL() + "setInactiveReservation",
 					headers: {
 					   	'Content-Type': 'application/x-www-form-urlencoded'
 					},
@@ -482,7 +482,7 @@ F5App.app.directive('delete', ['$document','$http', function($document,$http) {
 				//console.log(scope.completeInfo.id_group_all_weeks);
 				var req = {
 					method: 'POST',
-					url: F5App.base_url + "setInactiveReservationAllWeeks",
+					url: App.getBaseURL() + "setInactiveReservationAllWeeks",
 					headers: {
 					   	'Content-Type': 'application/x-www-form-urlencoded'
 					},
@@ -515,13 +515,13 @@ F5App.app.directive('delete', ['$document','$http', function($document,$http) {
 	}
   }]);
 
-  F5App.app.directive('searchBtn', ['$document','$timeout','$http', function($document,$timeout,$http) {
+  App.getAppInstance().directive('searchBtn', ['$document','$timeout','$http', function($document,$timeout,$http) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
         angular.element('#loading-modal').modal('show');
 
-		$http.get(F5App.base_url + "getClientsData").
+		$http.get(App.getBaseURL() + "getClientsData").
 		  success(function(data, status, headers, config) {
 		    angular.element('#loading-modal').modal('hide');
 		 	//$timeout(function(){
@@ -544,12 +544,12 @@ F5App.app.directive('delete', ['$document','$http', function($document,$http) {
 	}
   }]);
 
-  F5App.app.directive('selectUserBtn', ['$document','$timeout','$http', function($document,$timeout,$http) {
+  App.getAppInstance().directive('selectUserBtn', ['$document','$timeout','$http', function($document,$timeout,$http) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
         angular.element('#loading-modal').modal('show');
-        $http.get(F5App.base_url + "getClientsData").
+        $http.get(App.getBaseURL() + "getClientsData").
 		  success(function(data, status, headers, config) {
 		    angular.element('#loading-modal').modal('hide');
 		 	//$timeout(function(){
@@ -571,7 +571,7 @@ F5App.app.directive('delete', ['$document','$http', function($document,$http) {
 	}
   }]);
 
-  F5App.app.directive('changePasswordBtn', ['$document','$http', function($document,$http) {
+  App.getAppInstance().directive('changePasswordBtn', ['$document','$http', function($document,$http) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
@@ -585,7 +585,7 @@ F5App.app.directive('delete', ['$document','$http', function($document,$http) {
 
 			var req = {
 				method: 'POST',
-				url: F5App.base_url + "changePassword",
+				url: App.getBaseURL() + "changePassword",
 				headers: {
 				   	'Content-Type': 'application/x-www-form-urlencoded'
 				},
@@ -598,7 +598,7 @@ F5App.app.directive('delete', ['$document','$http', function($document,$http) {
 				alert("La cuenta se ha actualizado satisfactoriamente. Nota: Debe deslogearse y volver a logearse con la cuenta moficada para visualizar los cambios");
 				angular.element('#edit-account-modal').modal('hide');
 				
-				$http.get(F5App.base_url + "getAccountsData").then(function(response) {
+				$http.get(App.getBaseURL() + "getAccountsData").then(function(response) {
 				 	//$timeout(function(){
 						scope.$root.accounts = angular.fromJson(response.data);
 					//});
@@ -606,8 +606,8 @@ F5App.app.directive('delete', ['$document','$http', function($document,$http) {
 				    // called asynchronously if an error occurs
 				    // or server returns response with an error status.
 				  });
-				//F5App.leaveSafelyPage = true;
-				//window.location = F5App.base_url + 'logout';
+				//App.setLeavePageConfirmation(true);
+				//window.location = App.getBaseURL() + 'logout';
 		
 			},function(response) {
 			    // called asynchronously if an error occurs
@@ -627,7 +627,7 @@ F5App.app.directive('delete', ['$document','$http', function($document,$http) {
   }]);
 
 
-  F5App.app.directive('fillFormClientBtn', ['$document', function($document) {
+  App.getAppInstance().directive('fillFormClientBtn', ['$document', function($document) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
@@ -650,7 +650,7 @@ F5App.app.directive('delete', ['$document','$http', function($document,$http) {
   }]);
 
 
-  F5App.app.directive('checkAvailabilityBtn', ['$document','$timeout','$http', function($document,$timeout,$http) {
+  App.getAppInstance().directive('checkAvailabilityBtn', ['$document','$timeout','$http', function($document,$timeout,$http) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
@@ -667,7 +667,7 @@ F5App.app.directive('delete', ['$document','$http', function($document,$http) {
 
 		var req = {
 			method: 'POST',
-			url: F5App.base_url + "checkAvailability",
+			url: App.getBaseURL() + "checkAvailability",
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
@@ -702,7 +702,7 @@ F5App.app.directive('delete', ['$document','$http', function($document,$http) {
 	}
   }]);
 
-F5App.app.directive('insertCardData', ['$document', function($document) {
+App.getAppInstance().directive('insertCardData', ['$document', function($document) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
@@ -724,7 +724,7 @@ F5App.app.directive('insertCardData', ['$document', function($document) {
 	}
   }]);
 
-F5App.app.directive('returnToFormReservation', ['$document', function($document) {
+App.getAppInstance().directive('returnToFormReservation', ['$document', function($document) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
@@ -740,7 +740,7 @@ F5App.app.directive('returnToFormReservation', ['$document', function($document)
 	}
   }]);
 
-F5App.app.directive('reserveAndPayBtn', ['$document','$http','$timeout', function($document,$http,$timeout) {
+App.getAppInstance().directive('reserveAndPayBtn', ['$document','$http','$timeout', function($document,$http,$timeout) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
@@ -757,7 +757,7 @@ F5App.app.directive('reserveAndPayBtn', ['$document','$http','$timeout', functio
         	angular.element('#processing-card-modal').modal('show');
         	var req = {
 				method: 'POST',
-				url: F5App.base_url + "acceptCreditCardPayment",
+				url: App.getBaseURL() + "acceptCreditCardPayment",
 				headers: {
 				   	'Content-Type': 'application/x-www-form-urlencoded'
 				},
@@ -795,12 +795,12 @@ F5App.app.directive('reserveAndPayBtn', ['$document','$http','$timeout', functio
 	}
   }]);
 
-  F5App.app.directive('modifyAccountsBtn', ['$document','$timeout','$http', function($document,$timeout,$http) {
+  App.getAppInstance().directive('modifyAccountsBtn', ['$document','$timeout','$http', function($document,$timeout,$http) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
         angular.element('#loading-modal').modal('show');
-        $http.get(F5App.base_url + "getAccountsData").
+        $http.get(App.getBaseURL() + "getAccountsData").
 		  success(function(data, status, headers, config) {
 		    angular.element('#loading-modal').modal('hide');
 		 	//$timeout(function(){
@@ -821,7 +821,7 @@ F5App.app.directive('reserveAndPayBtn', ['$document','$http','$timeout', functio
 	}
   }]);
 
-  F5App.app.directive('editAccountBtn', ['$document','$timeout','$http', function($document,$timeout,$http) {
+  App.getAppInstance().directive('editAccountBtn', ['$document','$timeout','$http', function($document,$timeout,$http) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
@@ -840,7 +840,7 @@ F5App.app.directive('reserveAndPayBtn', ['$document','$http','$timeout', functio
 	}
   }]);
 
-  F5App.app.directive('updateRatesBtn', ['$document','$http', function($document,$http) {
+  App.getAppInstance().directive('updateRatesBtn', ['$document','$http', function($document,$http) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
@@ -860,7 +860,7 @@ F5App.app.directive('reserveAndPayBtn', ['$document','$http','$timeout', functio
 
 			var req = {
 				method: 'POST',
-				url: F5App.base_url + "changeRates",
+				url: App.getBaseURL() + "changeRates",
 				headers: {
 				   	'Content-Type': 'application/x-www-form-urlencoded'
 				},
@@ -892,7 +892,7 @@ F5App.app.directive('reserveAndPayBtn', ['$document','$http','$timeout', functio
 	}
   }]);
 
-F5App.app.directive('saveBookingEdited', ['$document','$http', function($document,$http) {
+App.getAppInstance().directive('saveBookingEdited', ['$document','$http', function($document,$http) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
@@ -901,7 +901,7 @@ F5App.app.directive('saveBookingEdited', ['$document','$http', function($documen
 		if(!scope.fields.editAllCccurrences){
         	var req = {
 				method: 'POST',
-				url: F5App.base_url + "updateResevation",
+				url: App.getBaseURL() + "updateResevation",
 				headers: {
 				   	'Content-Type': 'application/x-www-form-urlencoded'
 				},
@@ -921,7 +921,7 @@ F5App.app.directive('saveBookingEdited', ['$document','$http', function($documen
 		}else{
 			var req = {
 				method: 'POST',
-				url: F5App.base_url + "updateReservationAllWeeks",
+				url: App.getBaseURL() + "updateReservationAllWeeks",
 				headers: {
 				   	'Content-Type': 'application/x-www-form-urlencoded'
 				},

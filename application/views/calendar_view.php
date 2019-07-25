@@ -93,7 +93,7 @@
                             <dl>
                                 <dt>Reservaci&oacute;n en l&iacute;nea: le permite reservar y pagar la cancha usando su tarjeta de cr&eacute;dito o d&eacute;bito.</dt>
                                     <dd class="radio"><input id="bookingOnLine" class="bookingOnLine" type="radio" name="bookingOnLine" value="bookingOnLine" ng-model="bookingType"><label for="bookingOnLine">Reservar en l&iacute;nea</label></dd>
-                            <dl/>
+                            </dl>
                         </li>
                         <li>
                             <dl>

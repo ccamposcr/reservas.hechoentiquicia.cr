@@ -69,7 +69,7 @@ var getJSBuild = function(name){
           .src( jsBuildVars[name].src )
           .pipe( include() )
               .on( 'error', console.log )
-          .pipe(uglify())
+          //.pipe(uglify())
           .pipe( rename( jsBuildVars[name].rename ) )
           .pipe( gulp.dest( jsBuildVars[name].dest ) );
   };
