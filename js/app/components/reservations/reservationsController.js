@@ -35,14 +35,14 @@ F5App.app.controller("reservationController", ['$scope','$rootScope','$timeout',
 		 	cache : false
 		}
 
-		$http(req).success(function(response, status, headers, config) {
+		$http(req).then(function(response) {
 			//$timeout(function(){
-				$scope.reservations = $scope.sortReservations(angular.fromJson(response));
+				$scope.reservations = $scope.sortReservations(angular.fromJson(response.data));
 			//});
 			angular.element('#loading-modal').modal('hide');
 			angular.element('#dailyResevations').show();
 	
-		}).error(function(response, status, headers, config) {
+		},function(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		});
@@ -60,13 +60,13 @@ F5App.app.controller("reservationController", ['$scope','$rootScope','$timeout',
 		 	cache : false
 		}
 
-		$http(req).success(function(response, status, headers, config) {
+		$http(req).then(function(response) {
 			//$timeout(function(){
-				$scope.pitchs = angular.fromJson(response);
+				$scope.pitchs = angular.fromJson(response.data);
 			//});
 			angular.element('#pitchs').show();
 	
-		}).error(function(response, status, headers, config) {
+		},function(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		});
@@ -168,9 +168,7 @@ F5App.app.controller("reservationController", ['$scope','$rootScope','$timeout',
 		 	cache : false
 		}
 
-		$http(req).success(function(response, status, headers, config) {
-	
-		}).error(function(response, status, headers, config) {
+		$http(req).then(function(response) {},function(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		});
@@ -203,9 +201,9 @@ F5App.app.controller("reservationController", ['$scope','$rootScope','$timeout',
 		 	cache : false
 		}
 
-		$http(req).success(function(response, status, headers, config) {
-			$rootScope.rates = angular.fromJson(response);
-		}).error(function(response, status, headers, config) {
+		$http(req).then(function(response) {
+			$rootScope.rates = angular.fromJson(response.data);
+		},function(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		});
@@ -265,12 +263,12 @@ F5App.app.controller("reservationController", ['$scope','$rootScope','$timeout',
 		 	cache : false
 		}
 
-		$http(req).success(function(response, status, headers, config) {
+		$http(req).then(function(response) {
 			//angular.element('#loading-modal').modal('hide');
 			angular.element('#sending-email-modal').modal('hide');
 			$scope.loadReservations();
 	
-		}).error(function(response, status, headers, config) {
+		},function(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		});
@@ -288,12 +286,12 @@ F5App.app.controller("reservationController", ['$scope','$rootScope','$timeout',
 		 	cache : false
 		}
 
-		$http(req).success(function(response, status, headers, config) {
+		$http(req).then(function(response) {
 			//angular.element('#loading-modal').modal('hide');
 			angular.element('#sending-sms-modal').modal('hide');
 			$scope.loadReservations();
 	
-		}).error(function(response, status, headers, config) {
+		}).error(function(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		});

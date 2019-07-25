@@ -49,9 +49,9 @@ F5App.app.directive('available', ['$document','$http','$timeout', function($docu
 		 	cache : false
 		}
 
-		$http(req).success(function(response, status, headers, config) {
+		$http(req).then(function(response) {
 			angular.element('#loading-modal').modal('hide');
-			var response = angular.fromJson(response);
+			var dataResponse = angular.fromJson(response.data);
 			var state = 0;
 			/*
 				States 
@@ -61,8 +61,7 @@ F5App.app.directive('available', ['$document','$http','$timeout', function($docu
 				4. The BD didn't return anything data, so you can book you reservation now.
 				5. The reservation already exists
 			*/
-
-			state = ( response.length == 0 ) ? '4' : response[0].state;
+			state = ( dataResponse.length ) ? dataResponse[0].state : '4';
 
 			switch(state){
 				case '1':
@@ -98,7 +97,7 @@ F5App.app.directive('available', ['$document','$http','$timeout', function($docu
 				break;
 			}
 	
-		}).error(function(response, status, headers, config) {
+		},function(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		});
@@ -129,9 +128,10 @@ F5App.app.directive('bookingOnLine', ['$document','$http','$interval', function(
 		 	cache : false
 		}
 
-		$http(req).success(function(response, status, headers, config) {
+		$http(req).then(function(response) {
+			var dataResponse = angular.fromJson(response.data)
 			angular.element('#loading-modal').modal('hide');
-			if(angular.fromJson(response).length > 0){
+			if(dataResponse.length){
 				data.state = '5';// Reservada
 				scope.setStateTemporaryReservation(data);
 				
@@ -147,7 +147,7 @@ F5App.app.directive('bookingOnLine', ['$document','$http','$interval', function(
 				scope.setStateTemporaryReservation(data);
 			}
 	
-		}).error(function(response, status, headers, config) {
+		},function(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		});
@@ -206,7 +206,7 @@ F5App.app.directive('reserveBtn', ['$document','$http','$filter', function($docu
 				 	cache : false
 				}
 
-				$http(req).success(function(response, status, headers, config) {
+				$http(req).then(function(response) {
 					var dataTmp = scope.getDataForTemporaryReservation();
 						dataTmp.state = '5'; 
 						scope.setStateTemporaryReservation(dataTmp);
@@ -274,7 +274,7 @@ F5App.app.directive('reserveBtn', ['$document','$http','$filter', function($docu
 							scope.loadReservations();
 						}
 
-				}).error(function(response, status, headers, config) {
+				},function(response) {
 				    // called asynchronously if an error occurs
 				    // or server returns response with an error status.
 				});				
@@ -306,7 +306,7 @@ F5App.app.directive('reserveBtn', ['$document','$http','$filter', function($docu
 				 	cache : false
 				}
 
-				$http(req).success(function(response, status, headers, config) {
+				$http(req).then(function(response) {
 					angular.element('#formReservationModal').modal('hide');
 					angular.element('#set-pitch-all-weeks-modal').modal('hide');
 					//scope.loadReservations();
@@ -328,7 +328,7 @@ F5App.app.directive('reserveBtn', ['$document','$http','$filter', function($docu
 											});
 					}
 					if( !!data.email ){
-						var daysAvailables = angular.fromJson(response);
+						var daysAvailables = angular.fromJson(response.data);
 
 						for(i = 0; i < data['dates'].length; i++){
 							result[i].push(data['dates'][i][0] + '/'+data['dates'][i][1] + '/' +  data['dates'][i][2]);
@@ -385,7 +385,7 @@ F5App.app.directive('reserveBtn', ['$document','$http','$filter', function($docu
 						scope.loadReservations();
 					}
 		
-				}).error(function(response, status, headers, config) {
+				},function(response) {
 				    // called asynchronously if an error occurs
 				    // or server returns response with an error status.
 				});
@@ -426,14 +426,14 @@ F5App.app.directive('showInfo', ['$document','$timeout','$http', function($docum
 		 	cache : false
 		}
 
-		$http(req).success(function(response, status, headers, config) {
+		$http(req).then(function(response) {
 			angular.element('#loading-modal').modal('hide');
 			//$timeout(function(){
-				scope.$root.completeInfo = angular.fromJson(response)[0];
+				scope.$root.completeInfo = angular.fromJson(response.data)[0];
 			//});
 			angular.element('#show-info-modal').modal('show');
 	
-		}).error(function(response, status, headers, config) {
+		},function(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		});
@@ -469,12 +469,12 @@ F5App.app.directive('delete', ['$document','$http', function($document,$http) {
 				 	cache : false
 				}
 
-				$http(req).success(function(response, status, headers, config) {
+				$http(req).then(function(response) {
 					//alert('Registro Eliminado');
 					angular.element('#loading-modal').modal('hide');
 					scope.loadReservations();
 			
-				}).error(function(response, status, headers, config) {
+				},function(response) {
 				    // called asynchronously if an error occurs
 				    // or server returns response with an error status.
 				});
@@ -490,12 +490,12 @@ F5App.app.directive('delete', ['$document','$http', function($document,$http) {
 				 	cache : false
 				}
 
-				$http(req).success(function(response, status, headers, config) {
+				$http(req).then(function(response) {
 					//alert('Registro Eliminado');
 					angular.element('#loading-modal').modal('hide');
 					scope.loadReservations();
 			
-				}).error(function(response, status, headers, config) {
+				},function(response) {
 				    // called asynchronously if an error occurs
 				    // or server returns response with an error status.
 				});
@@ -593,25 +593,23 @@ F5App.app.directive('delete', ['$document','$http', function($document,$http) {
 			 	cache : false
 			}
 
-			$http(req).success(function(response, status, headers, config) {
+			$http(req).then(function(response) {
 				angular.element('#loading-modal').modal('hide');
 				alert("La cuenta se ha actualizado satisfactoriamente. Nota: Debe deslogearse y volver a logearse con la cuenta moficada para visualizar los cambios");
 				angular.element('#edit-account-modal').modal('hide');
 				
-				$http.get(F5App.base_url + "getAccountsData").
-				  success(function(data, status, headers, config) {
+				$http.get(F5App.base_url + "getAccountsData").then(function(response) {
 				 	//$timeout(function(){
-						scope.$root.accounts = angular.fromJson(data);
+						scope.$root.accounts = angular.fromJson(response.data);
 					//});
-				  }).
-				  error(function(data, status, headers, config) {
+				  },function(response) {
 				    // called asynchronously if an error occurs
 				    // or server returns response with an error status.
 				  });
 				//F5App.leaveSafelyPage = true;
 				//window.location = F5App.base_url + 'logout';
 		
-			}).error(function(response, status, headers, config) {
+			},function(response) {
 			    // called asynchronously if an error occurs
 			    // or server returns response with an error status.
 			});
@@ -677,8 +675,8 @@ F5App.app.directive('delete', ['$document','$http', function($document,$http) {
 		 	cache : false
 		}
 
-		$http(req).success(function(response, status, headers, config) {
-			var daysAvailables = angular.fromJson(response);
+		$http(req).then(function(response) {
+			var daysAvailables = angular.fromJson(response.data);
 
 			for(i = 0; i < data['dates'].length; i++){
 				result[i].push(data['dates'][i][0] + '/'+data['dates'][i][1] + '/' +  data['dates'][i][2]);
@@ -690,7 +688,7 @@ F5App.app.directive('delete', ['$document','$http', function($document,$http) {
 			angular.element('#loading-modal').modal('hide');
 			angular.element('#check-availability-modal').modal('show');
 
-		}).error(function(response, status, headers, config) {
+		},function(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		});
@@ -767,20 +765,20 @@ F5App.app.directive('reserveAndPayBtn', ['$document','$http','$timeout', functio
 			 	cache : false
 			}
 
-			$http(req).success(function(response, status, headers, config) {
+			$http(req).then(function(response) {
+				var dataResponse = response.data;
 				angular.element('#processing-card-modal').modal('hide');
-				console.log(response);
-				if( response.state == "approved" ){
+				if( dataResponse.state == "approved" ){
 					angular.element('#formReservationModal').modal('hide');
 					$timeout(function(){
 							angular.element('#reserveAfterPayBtn').trigger('click');
 					});
 				}
 				else{
-					scope.fields.response_error = response.details;
+					scope.fields.response_error = dataResponse.details;
 				}
 				
-			}).error(function(response, status, headers, config) {
+			},function(response) {
 			    // called asynchronously if an error occurs
 			    // or server returns response with an error status.
 			});
@@ -870,13 +868,13 @@ F5App.app.directive('reserveAndPayBtn', ['$document','$http','$timeout', functio
 			 	cache : false
 			}
 
-			$http(req).success(function(response, status, headers, config) {
+			$http(req).then(function(response) {
 				angular.element('#loading-modal').modal('hide');
 				alert("Las tarifas han sido actualizados");
 				angular.element('#edit-rates-modal').modal('hide');
 				scope.getRates();
 		
-			}).error(function(response, status, headers, config) {
+			},function(responseg) {
 			    // called asynchronously if an error occurs
 			    // or server returns response with an error status.
 			});
@@ -911,12 +909,12 @@ F5App.app.directive('saveBookingEdited', ['$document','$http', function($documen
 			 	cache : false
 			}
 
-			$http(req).success(function(response, status, headers, config) {
+			$http(req).then(function(response) {
 				//alert('Registro Eliminado');
 				angular.element('#loading-modal').modal('hide');
 				scope.loadReservations();
 		
-			}).error(function(response, status, headers, config) {
+			},function(response) {
 			    // called asynchronously if an error occurs
 			    // or server returns response with an error status.
 			});
@@ -931,12 +929,12 @@ F5App.app.directive('saveBookingEdited', ['$document','$http', function($documen
 			 	cache : false
 			}
 
-			$http(req).success(function(response, status, headers, config) {
+			$http(req).then(function(response) {
 				//alert('Registro Eliminado');
 				angular.element('#loading-modal').modal('hide');
 				scope.loadReservations();
 		
-			}).error(function(response, status, headers, config) {
+			},function(response) {
 			    // called asynchronously if an error occurs
 			    // or server returns response with an error status.
 			});

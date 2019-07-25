@@ -17,4 +17,13 @@
 		<email></email>
 		<waze></waze>
 	</complejo2>
+
+	<internal>
+		<detail></detail>
+		<mapUrl></mapUrl>
+		<phone1></phone1>
+		<phone2></phone2>
+		<email></email>
+		<waze></waze>
+	</internal>
 </footer>

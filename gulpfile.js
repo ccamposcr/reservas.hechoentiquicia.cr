@@ -1,6 +1,5 @@
 var gulp         = require('gulp'),
     sass         = require('gulp-sass'),
-    jade         = require('gulp-jade'),
     autoprefixer = require('gulp-autoprefixer'),
     plumber      = require('gulp-plumber'),
     watch        = require('gulp-watch'),
@@ -8,7 +7,6 @@ var gulp         = require('gulp'),
     rename       = require('gulp-rename'),
     eslint       = require('gulp-eslint'),
     browserSync  = require('browser-sync').create(),
-    debug        = require('gulp-debug'),
     runSequence  = require('run-sequence'),
     uglify       = require('gulp-uglify'),
     jsBuildVars  = {
@@ -45,7 +43,7 @@ var executeTaskAndReload = function(args){
 }
 
 // Watch
-var watch = function() {
+var watch_task = function() {
   //watch for changes on scss js
   watch('./scss/**/**/*.scss', executeTaskAndReload.bind(null, ['sass']));
   watch(['./js/**/**/*.js'], executeTaskAndReload.bind(null, ['js_util','js_vendor','js_components']));
@@ -60,10 +58,7 @@ var sass_task = function() {
                   outputStyle: 'compressed',
                   precision: 10
                 }).on('error', sass.logError))
-                .pipe(autoprefixer({
-                      browsers: ['last 2 versions', 'last 4 iOS versions', 'ie >= 10'],
-                      cascade: false
-                    })
+                .pipe(autoprefixer()
                   )
                 .pipe(gulp.dest('./css/'));
 };
@@ -102,7 +97,7 @@ gulp.task('js_util', js_util_build );
 gulp.task('js_vendor', js_vendor_build );
 gulp.task('js_components', js_components_build );
 gulp.task('lint', lint );
-gulp.task('watch', watch);
+gulp.task('watch', watch_task);
 
 gulp.task('build', ['js_util', 'js_vendor', 'js_components', 'sass'] );
 gulp.task('default', ['build','watch']);

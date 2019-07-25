@@ -23,7 +23,7 @@ class Login extends CI_Controller {
                 break;
         }
 
-        $this->load->view('includes/internal_footer', $footerOptions);
+        $this->load->view('includes/footer', $footerOptions);
     }
 
     function verify() {
@@ -47,7 +47,7 @@ class Login extends CI_Controller {
                     break;
             }
 
-            $this->load->view('includes/internal_footer', $footerOptions);
+            $this->load->view('includes/footer', $footerOptions);
         }
         else{
             redirect($this->uri->segment(1) . '/1/admin');

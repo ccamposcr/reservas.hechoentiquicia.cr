@@ -15,7 +15,8 @@ class Pages extends CI_Controller {
         }else{
             $this->load->view('home_view');
         }
-        $this->load->view('includes/footer');
+        $footerOptions = simplexml_load_file("xml/footer.xml");
+        $this->load->view('includes/footer', $footerOptions->internal);
     }
 
     function page_404(){
