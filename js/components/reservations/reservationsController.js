@@ -39,7 +39,10 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 			//$timeout(function(){
 				$scope.reservations = $scope.sortReservations(angular.fromJson(response.data));
 			//});
-			angular.element('#loading-modal').modal('hide');
+			//console.log('CHRIS');
+			//$timeout(function(){
+				angular.element('#loading-modal').modal('hide');
+			//});
 			angular.element('#dailyResevations').show();
 	
 		},function(response) {

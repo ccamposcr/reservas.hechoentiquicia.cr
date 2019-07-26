@@ -1,33 +1,25 @@
 ////ATTENTION!/////
 //components.js is a generated file. To edit the source go to /js/components/index.js
 
-App.getAppInstance().controller("headerController", ['$scope','$rootScope',function ($scope, $rootScope){
+App.getAppInstance().controller("headerController", ['$scope',function ($scope){
 
+    $scope.setActive = function (){
 
+		var location = window.location.href;
 
-   $scope.setActive = function (){
+   		if( location.match('reservaciones') || location.match('admin')){
 
-   		if( !!window.location.href.match('reservaciones') || !!window.location.href.match('admin')){
-
-   			angular.element('#mainNav .reservaciones').addClass('active');
-
-   		}
-
-   		else if ( !!window.location.href.match('galeria') ){
-
-   			angular.element('#mainNav .galeria').addClass('active');
+			$scope.menuOptionActive = 1;
 
    		}
 
    		else{
 
-   			angular.element('#mainNav .home').addClass('active');
+			$scope.menuOptionActive = 0;
 
    		}
 
-   };
-
-
+    };
 
 }]);
 App.getAppInstance().controller("modalController", ['$scope','$rootScope','$interval','$timeout', function ($scope, $rootScope,$interval, $timeout){
@@ -196,7 +188,10 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 			//$timeout(function(){
 				$scope.reservations = $scope.sortReservations(angular.fromJson(response.data));
 			//});
-			angular.element('#loading-modal').modal('hide');
+			//console.log('CHRIS');
+			//$timeout(function(){
+				angular.element('#loading-modal').modal('hide');
+			//});
 			angular.element('#dailyResevations').show();
 	
 		},function(response) {
@@ -644,6 +639,7 @@ App.getAppInstance().directive('bookingOnLine', ['$document','$http','$interval'
 		$http(req).then(function(response) {
 			var dataResponse = angular.fromJson(response.data)
 			angular.element('#loading-modal').modal('hide');
+			console.log('CHRIS');
 			if(dataResponse.length){
 				data.state = '5';// Reservada
 				scope.setStateTemporaryReservation(data);

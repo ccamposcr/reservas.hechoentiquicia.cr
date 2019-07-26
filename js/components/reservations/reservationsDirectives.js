@@ -131,6 +131,7 @@ App.getAppInstance().directive('bookingOnLine', ['$document','$http','$interval'
 		$http(req).then(function(response) {
 			var dataResponse = angular.fromJson(response.data)
 			angular.element('#loading-modal').modal('hide');
+			console.log('CHRIS');
 			if(dataResponse.length){
 				data.state = '5';// Reservada
 				scope.setStateTemporaryReservation(data);
