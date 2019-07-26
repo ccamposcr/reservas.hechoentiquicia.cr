@@ -19,8 +19,10 @@
                     </a>
                     <ul id="mainNav" ng-init="setActive()">
                         <?php foreach ($button as $index => $row) {
-                            $url_segment = ($index == 0) ? '' : $this->uri->segment(1);
-                            echo '<li class="' . $row->type . '"><a ng-class="{'."active".': menuOptionActive == '.$index.'}" ng-model="menuOptionActive" value="'.$index.'" href="' . base_url() . $url_segment . $row->url .'">'. $row->text .'</a></li>';
+                            $url_segment = $index != 0 ? $this->uri->segment(1) : '';
+                            $url = base_url() . $url_segment . $row->url;
+                            $url_str = "'" . $url . "'";
+                            echo '<li class="' . $row->type . '"><a ng-class="{active: menuOptionActive == '. $url_str .'}" ng-model="menuOptionActive" href="' . $url .'">'. $row->text .'</a></li>';
                         }?>
                     </ul>
                 </div>

@@ -5,19 +5,9 @@ App.getAppInstance().controller("headerController", ['$scope',function ($scope){
 
     $scope.setActive = function (){
 
-		var location = window.location.href;
+		var location = window.location.pathname;
 
-   		if( location.match('reservaciones') || location.match('admin')){
-
-			$scope.menuOptionActive = 1;
-
-   		}
-
-   		else{
-
-			$scope.menuOptionActive = 0;
-
-   		}
+		$scope.menuOptionActive = location;
 
     };
 
