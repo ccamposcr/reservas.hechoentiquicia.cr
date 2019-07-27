@@ -1,5 +1,36 @@
-App.getAppInstance().controller("modalController", ['$scope','$rootScope','$interval','$timeout', function ($scope, $rootScope,$interval, $timeout){
-	angular.element('#formReservationModal').on('hidden.bs.modal', function(){
+//App.getAppInstance().controller("modalController", ['$scope','$rootScope','$interval','$timeout', function ($scope, $rootScope,$interval, $timeout){
+	App.getAppInstance().controller("modalController", ['$scope','$rootScope','$uibModal','$log','$document', function ($scope, $rootScope,$uibModal,$log,$document){
+		var $modalCtrl = this;
+		$modalCtrl.items = ['item1', 'item2', 'item3'];
+
+		$modalCtrl.animationsEnabled = true;
+	  
+		$modalCtrl.open = function (size, parentSelector) {
+		  var parentElem = parentSelector ? 
+			angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+		  var modalInstance = $uibModal.open({
+			animation: $modalCtrl.animationsEnabled,
+			ariaLabelledBy: 'modal-title',
+			ariaDescribedBy: 'modal-body',
+			templateUrl: 'myModalContent.html',
+			controller: 'ModalInstanceCtrl',
+			controllerAs: '$modalCtrl',
+			size: size,
+			appendTo: parentElem,
+			resolve: {
+			  items: function () {
+				return $modalCtrl.items;
+			  }
+			}
+		  });
+	  
+		  modalInstance.result.then(function (selectedItem) {
+			$modalCtrl.selected = selectedItem;
+		  }, function () {
+			$log.info('Modal dismissed at: ' + new Date());
+		  });
+		};
+	/*angular.element('#formReservationModal').on('hidden.bs.modal', function(){
 		
 		if( !$scope.successReservation ){
 			var data = $rootScope.getDataForTemporaryReservation();
@@ -18,9 +49,10 @@ App.getAppInstance().controller("modalController", ['$scope','$rootScope','$inte
 		angular.element('#bookingForm').show();
         angular.element('#carDataForm').hide();
 		//$scope.loadReservations();
-	});
+		
+	});*/
 
-	angular.element('#edit-account-modal').on('hidden.bs.modal', function(){
+	/*angular.element('#edit-account-modal').on('hidden.bs.modal', function(){
 		$timeout(function(){
 			$scope.fields.password = '';
 			$scope.fields.confirmation = '';
@@ -35,7 +67,7 @@ App.getAppInstance().controller("modalController", ['$scope','$rootScope','$inte
 			$scope.changePassForm.nameAccountToEdit.$pristine = true;
 			$scope.changePassForm.nameAccountToEdit.$dirty = false;
 		});
-	});
+	});*/
 
 	/*angular.element('#edit-account-modal').on('show.bs.modal', function(){
 		$timeout(function(){
@@ -43,7 +75,7 @@ App.getAppInstance().controller("modalController", ['$scope','$rootScope','$inte
 		});
 	});*/
 
-	angular.element('#formReservationModal').on('show.bs.modal', function(){
+	/*angular.element('#formReservationModal').on('show.bs.modal', function(){
 		$scope.successReservation = false;
 	});
 
@@ -62,19 +94,19 @@ App.getAppInstance().controller("modalController", ['$scope','$rootScope','$inte
 	});
 
 	var onCancel = function(){
-		angular.element('#formReservationModal').modal('hide');
+		//angular.element('#formReservationModal').modal('hide');
 	}
 
 	var onContinue = function(){
 		//Continue
-	}
+	}*/
 
-	angular.element('#cancelReservationBtn').confirmation({
+	/*angular.element('#cancelReservationBtn').confirmation({
 		onConfirm : onContinue,
 		onCancel : onCancel
-	});
+	});*/
 
-	$scope.clearReservationForm = function(){
+	/*$scope.clearReservationForm = function(){
 		$scope.fields.email = '';
 		$scope.fields.lastname1 = '';
 		$scope.fields.lastname2 = '';
@@ -120,6 +152,51 @@ App.getAppInstance().controller("modalController", ['$scope','$rootScope','$inte
 		
 		$interval.cancel($scope.timeInterval);
 		$scope.time = '00:10:00';
-	}
+	}*/
 
 }]);
+
+App.getAppInstance().controller('ModalInstanceCtrl', function ($uibModalInstance, items) {
+	var $ctrl = this;
+	$ctrl.items = items;
+	$ctrl.selected = {
+	  item: $ctrl.items[0]
+	};
+  
+	$ctrl.ok = function () {
+	  $uibModalInstance.close($ctrl.selected.item);
+	};
+  
+	$ctrl.cancel = function () {
+	  $uibModalInstance.dismiss('cancel');
+	};
+  });
+  
+  // Please note that the close and dismiss bindings are from $uibModalInstance.
+  
+  App.getAppInstance().component('modalComponent', {
+	templateUrl: 'myModalContent.html',
+	bindings: {
+	  resolve: '<',
+	  close: '&',
+	  dismiss: '&'
+	},
+	controller: function () {
+	  var $ctrl = this;
+  
+	  $ctrl.$onInit = function () {
+		$ctrl.items = $ctrl.resolve.items;
+		$ctrl.selected = {
+		  item: $ctrl.items[0]
+		};
+	  };
+  
+	  $ctrl.ok = function () {
+		$ctrl.close({$value: $ctrl.selected.item});
+	  };
+  
+	  $ctrl.cancel = function () {
+		$ctrl.dismiss({$value: 'cancel'});
+	  };
+	}
+  });

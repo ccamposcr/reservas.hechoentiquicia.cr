@@ -1,9 +1,9 @@
 
-    <div  id="divContent" class="clearfix" ng-controller="reservationController">
+    <div  id="divContent" ng-click="onClickParentContainer()" ng-controller="reservationController">
         <h1>Reservaciones</h1>
-        <div id="pitchs">
-            <ul class="clearfix">
-                <li class="clearfix" ng-repeat="data in pitchs">
+        <div id="pitchs" ng-if="pitchsContainer">
+            <ul>
+                <li ng-repeat="data in pitchs">
                     <a class="{{(pitchValue == data.id_pitch) ? 'active' : ''}}" href="<?php echo base_url() . $this->uri->segment(1) . '/{{data.id_pitch}}/' . 'reservaciones' ?>">Cancha {{data.id_pitch}}</a>
                 </li>
             </ul>
@@ -11,10 +11,10 @@
                 $pitch = $this->uri->segment(2);
                 $group = $this->uri->segment(1);
             ?>
-            <input type="hidden" value="<?=$pitch?>" id="pitch" />
-            <input type="hidden" value="<?=$group?>" id="group" />
+            <input type="hidden" value="<?=$pitch?>" id="pitch" ng-model="pitchValue"/>
+            <input type="hidden" value="<?=$group?>" id="group" ng-model="groupValue"/>
         </div>
-        <div id="calendar" class="clearfix">
+        <div id="calendar">
         	<?=$calendar?>
         	<?php
 	        	$year = $this->uri->segment(4);
@@ -26,21 +26,21 @@
             $isAdminUser = (!!$this->session->userdata('logged_in')) ? '1' : '0';
 
 			     ?>
-          <input type="hidden" value="<?=$year?>" id="year" />
-		  <input type="hidden" value="<?=$month?>" id="month" />
-          <input type="hidden" value="" id="day" />
-          <input type="hidden" value="" id="team_id" />
-          <input type="hidden" value="" id="reservation_time" />
-          <input type="hidden" value="<?=$isAdminUser?>" id="isAdminUser"/>
+          <input type="hidden" value="<?=$year?>" id="year" ng-model="yearValue"/>
+		      <input type="hidden" value="<?=$month?>" id="month" ng-model="monthValue"/>
+          <input type="hidden" value="" id="day" ng-model="dayValue"/>
+          <input type="hidden" value="" id="team_id" ng-model="teamIDValue"/>
+          <input type="hidden" value="" id="reservation_time" ng-model="reservationTimeValue"/>
+          <input type="hidden" value="<?=$isAdminUser?>" id="isAdminUser" ng-model="isAdminUserValue"/>
         </div>
-        <div id="dailyResevations" ng-init="getDateFromServer()">
-            <ul id="timeAndTeamInfo" class="clearfix">
+        <div id="dailyResevations" ng-init="getDateFromServer()" ng-if="dailyResevationsActive">
+            <ul id="timeAndTeamInfo">
                 <li>Hora</li>
                 <li>Equipo 1</li>
                 <li>Equipo 2</li>
             </ul>
             <ul id="reservations" ng-if="isDateForBookingValid() || !isDateForBookingValid() && isAdminUser()">
-                <li class="row clearfix" ng-repeat="data in reservations">
+                <li class="row" ng-repeat="data in reservations">
                     <span class="reservation-time" data-time="{{timesForReservations[$index]}}">{{times[$index]}}</span>
                     <span ng-if="!!reservation.id && $index+1 == reservation.team_id && $index+1 == 1 && !isAdminUser()" class="blocked {{reservation.type_reservation == 1 ? 'completa' : ''}}" data-team="{{$index+1}}" ng-repeat="reservation in data">
                         <span>Reservado por:</span> {{reservation.name}} {{reservation.lastname}}
@@ -59,7 +59,7 @@
                 </li>
             </ul>
             <ul id="reservations" ng-if="!isDateForBookingValid() && !isAdminUser()">
-                <li class="row clearfix" ng-repeat="data in reservations">
+                <li class="row" ng-repeat="data in reservations">
                     <span class="reservation-time" data-time="{{timesForReservations[$index]}}">{{times[$index]}}</span>
                     <span ng-if="($index+1 == reservation.team_id && $index+1 == 1) || ($index+1 == reservation.team_id && $index+1 == 2)" class="blocked {{reservation.type_reservation == 1 ? 'completa' : ''}}" data-team="{{$index+1}}" ng-repeat="reservation in data">
                         <span ng-if="!!reservation.name && !! reservation.lastname">Reservado por:</span>  {{reservation.name}} {{reservation.lastname}}
@@ -80,12 +80,12 @@
         <div class="modal fade" id="formReservationModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false" ng-init="isAdminUser() && (bookingType = 'bookingOnLine')">
           <div class="modal-dialog">
             <div class="modal-content">
-              <div class="modal-header clearfix">
+              <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" ng-hide="bookingType == 'bookingOnLine'"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">Reservaciones<br/><span>Fecha y Hora a Reservar: <span id="reservationInfo"></span></span></h4>
                 <p ng-if="bookingType == 'bookingOnLine'">Tiempo Restante: <span>{{time}}</span></p>
               </div>
-              <div class="modal-body clearfix">
+              <div class="modal-body">
                 <div ng-hide="bookingType == 'bookingByCall' || bookingType == 'bookingOnLine'">
                     <h3>Elija el modo de reservaci&oacute;n</h3>
                     <ol>

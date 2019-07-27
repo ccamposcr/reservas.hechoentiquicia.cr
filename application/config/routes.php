@@ -50,66 +50,66 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-$route['default_controller'] = "pages";
-$route['404_override'] = 'pages/page_404';
+$route['default_controller'] = "Pages_ctrl";
+$route['404_override'] = 'Pages_ctrl/page_404';
 $route['translate_uri_dashes'] = FALSE;
 
 //Reservaciones Routes
 
 //complejo2
-$route['complejo2/(:num)/reservaciones'] = 'calendar/calendar/';
-$route['complejo2/(:num)/reservaciones/(:num)/(:any)'] = 'calendar/calendar/$2/$3';
+$route['complejo2/(:num)/reservaciones'] = 'Reservations_ctrl/reservations/';
+$route['complejo2/(:num)/reservaciones/(:num)/(:any)'] = 'Reservations_ctrl/reservations/$2/$3';
 
 //complejo1
-$route['complejo1/(:num)/reservaciones'] = 'calendar/calendar/';
-$route['complejo1/(:num)/reservaciones/(:num)/(:any)'] = 'calendar/calendar/$2/$3';
+$route['complejo1/(:num)/reservaciones'] = 'Reservations_ctrl/reservations/';
+$route['complejo1/(:num)/reservaciones/(:num)/(:any)'] = 'Reservations_ctrl/reservations/$2/$3';
 
 /*  ------------------------------------------------------------------ */
 
 //Admin Routes
 
 //complejo2
-$route['complejo2/(:num)/admin'] = 'calendar/admin/';
-$route['complejo2/(:num)/admin/(:num)/(:any)'] = 'calendar/admin/$2/$3';
+$route['complejo2/(:num)/admin'] = 'Reservations_ctrl/admin/';
+$route['complejo2/(:num)/admin/(:num)/(:any)'] = 'Reservations_ctrl/admin/$2/$3';
 
 //complejo1
-$route['complejo1/(:num)/admin'] = 'calendar/admin/';
-$route['complejo1/(:num)/admin/(:num)/(:any)'] = 'calendar/admin/$2/$3';
+$route['complejo1/(:num)/admin'] = 'Reservations_ctrl/admin/';
+$route['complejo1/(:num)/admin/(:num)/(:any)'] = 'Reservations_ctrl/admin/$2/$3';
 
 /* ------------------------------------------------------------------- */
 
 //Services Routs
-$route['getReservationByDay'] = 'api/getReservationByDay';
-$route['getReservationByTime'] = 'api/getReservationByTime';
-$route['getPitchByGroup'] = 'api/getPitchByGroup';
-$route['getGroup'] = 'api/getGroup';
-$route['getTemporaryReservationState'] = 'api/getTemporaryReservationState';
-$route['setTemporaryReservationState'] = 'api/setTemporaryReservationState';
-$route['checkIfReservationExist'] = 'api/checkIfReservationExist';
-$route['createReservation'] = 'api/createReservation';
-$route['setInactiveReservation'] = 'api/setInactiveReservation';
-$route['setInactiveReservationAllWeeks'] = 'api/setInactiveReservationAllWeeks';
-$route['checkExpiredReservations'] = 'checkexpiredreservations/checkExpiredReservations';
-$route['deleteAllTmpReservationsEndDay'] = 'checkexpiredreservations/deleteAllTmpReservationsEndDay';
-$route['sendEmail'] = 'email/sendEmail';
-$route['sendSMS'] = 'email/sendSMS';
-$route['getClientsData'] = 'api/getClientsData';
-$route['changePassword'] = 'login/changePassword';
-$route['reserveAllWeeksSameDay'] = 'api/reserveAllWeeksSameDay';
-$route['checkAvailability'] = 'api/checkAvailability';
-$route['acceptCreditCardPayment'] = 'paypal/acceptCreditCardPayment';
-$route['getDateFromServer'] = 'api/getDateFromServer';
-$route['getRates'] = 'api/getRates';
-$route['getAccountsData'] = 'api/getAccountsData';
-$route['changeRates'] = 'api/changeRates';
-$route['updateResevation'] = 'api/updateResevation';
-$route['updateReservationAllWeeks'] = 'api/updateReservationAllWeeks';
+$route['getReservationByDay'] = 'Api_ctrl/getReservationByDay';
+$route['getReservationByTime'] = 'Api_ctrl/getReservationByTime';
+$route['getPitchByGroup'] = 'Api_ctrl/getPitchByGroup';
+$route['getGroup'] = 'Api_ctrl/getGroup';
+$route['getTemporaryReservationState'] = 'Api_ctrl/getTemporaryReservationState';
+$route['setTemporaryReservationState'] = 'Api_ctrl/setTemporaryReservationState';
+$route['checkIfReservationExist'] = 'Api_ctrl/checkIfReservationExist';
+$route['createReservation'] = 'Api_ctrl/createReservation';
+$route['setInactiveReservation'] = 'Api_ctrl/setInactiveReservation';
+$route['setInactiveReservationAllWeeks'] = 'Api_ctrl/setInactiveReservationAllWeeks';
+$route['checkExpiredReservations'] = 'Check_expired_reservations/checkExpiredReservations';
+$route['deleteAllTmpReservationsEndDay'] = 'Check_expired_reservations/deleteAllTmpReservationsEndDay';
+$route['sendEmail'] = 'Email_ctrl/sendEmail';
+$route['sendSMS'] = 'Email_ctrl/sendSMS';
+$route['getClientsData'] = 'Api_ctrl/getClientsData';
+$route['changePassword'] = 'Login_ctrl/changePassword';
+$route['reserveAllWeeksSameDay'] = 'Api_ctrl/reserveAllWeeksSameDay';
+$route['checkAvailability'] = 'Api_ctrl/checkAvailability';
+$route['acceptCreditCardPayment'] = 'Paypal_ctrl/acceptCreditCardPayment';
+$route['getDateFromServer'] = 'Api_ctrl/getDateFromServer';
+$route['getRates'] = 'Api_ctrl/getRates';
+$route['getAccountsData'] = 'Api_ctrl/getAccountsData';
+$route['changeRates'] = 'Api_ctrl/changeRates';
+$route['updateResevation'] = 'Api_ctrl/updateResevation';
+$route['updateReservationAllWeeks'] = 'Api_ctrl/updateReservationAllWeeks';
 
 //Login - Logout Routes
-$route['(:any)/login'] = 'login';
-$route['(:any)/verifyLogin'] = 'login/verify';
+$route['(:any)/login'] = 'Login_ctrl';
+$route['(:any)/verifyLogin'] = 'Login_ctrl/verify';
 
 /* ------------------------------------------------------------------- */
 //Pages Routes
-$route['(:any)/accesoDenegado'] = 'pages/access_denied';
-$route['logout'] = 'admin/logout';
+$route['(:any)/accesoDenegado'] = 'Pages_ctrl/access_denied';
+$route['logout'] = 'Admin_ctrl/logout';

@@ -12,8 +12,39 @@ App.getAppInstance().controller("headerController", ['$scope',function ($scope){
     };
 
 }]);
-App.getAppInstance().controller("modalController", ['$scope','$rootScope','$interval','$timeout', function ($scope, $rootScope,$interval, $timeout){
-	angular.element('#formReservationModal').on('hidden.bs.modal', function(){
+//App.getAppInstance().controller("modalController", ['$scope','$rootScope','$interval','$timeout', function ($scope, $rootScope,$interval, $timeout){
+	App.getAppInstance().controller("modalController", ['$scope','$rootScope','$uibModal','$log','$document', function ($scope, $rootScope,$uibModal,$log,$document){
+		var $modalCtrl = this;
+		$modalCtrl.items = ['item1', 'item2', 'item3'];
+
+		$modalCtrl.animationsEnabled = true;
+	  
+		$modalCtrl.open = function (size, parentSelector) {
+		  var parentElem = parentSelector ? 
+			angular.element($document[0].querySelector('.modal-demo ' + parentSelector)) : undefined;
+		  var modalInstance = $uibModal.open({
+			animation: $modalCtrl.animationsEnabled,
+			ariaLabelledBy: 'modal-title',
+			ariaDescribedBy: 'modal-body',
+			templateUrl: 'myModalContent.html',
+			controller: 'ModalInstanceCtrl',
+			controllerAs: '$modalCtrl',
+			size: size,
+			appendTo: parentElem,
+			resolve: {
+			  items: function () {
+				return $modalCtrl.items;
+			  }
+			}
+		  });
+	  
+		  modalInstance.result.then(function (selectedItem) {
+			$modalCtrl.selected = selectedItem;
+		  }, function () {
+			$log.info('Modal dismissed at: ' + new Date());
+		  });
+		};
+	/*angular.element('#formReservationModal').on('hidden.bs.modal', function(){
 		
 		if( !$scope.successReservation ){
 			var data = $rootScope.getDataForTemporaryReservation();
@@ -32,9 +63,10 @@ App.getAppInstance().controller("modalController", ['$scope','$rootScope','$inte
 		angular.element('#bookingForm').show();
         angular.element('#carDataForm').hide();
 		//$scope.loadReservations();
-	});
+		
+	});*/
 
-	angular.element('#edit-account-modal').on('hidden.bs.modal', function(){
+	/*angular.element('#edit-account-modal').on('hidden.bs.modal', function(){
 		$timeout(function(){
 			$scope.fields.password = '';
 			$scope.fields.confirmation = '';
@@ -49,7 +81,7 @@ App.getAppInstance().controller("modalController", ['$scope','$rootScope','$inte
 			$scope.changePassForm.nameAccountToEdit.$pristine = true;
 			$scope.changePassForm.nameAccountToEdit.$dirty = false;
 		});
-	});
+	});*/
 
 	/*angular.element('#edit-account-modal').on('show.bs.modal', function(){
 		$timeout(function(){
@@ -57,7 +89,7 @@ App.getAppInstance().controller("modalController", ['$scope','$rootScope','$inte
 		});
 	});*/
 
-	angular.element('#formReservationModal').on('show.bs.modal', function(){
+	/*angular.element('#formReservationModal').on('show.bs.modal', function(){
 		$scope.successReservation = false;
 	});
 
@@ -76,19 +108,19 @@ App.getAppInstance().controller("modalController", ['$scope','$rootScope','$inte
 	});
 
 	var onCancel = function(){
-		angular.element('#formReservationModal').modal('hide');
+		//angular.element('#formReservationModal').modal('hide');
 	}
 
 	var onContinue = function(){
 		//Continue
-	}
+	}*/
 
-	angular.element('#cancelReservationBtn').confirmation({
+	/*angular.element('#cancelReservationBtn').confirmation({
 		onConfirm : onContinue,
 		onCancel : onCancel
-	});
+	});*/
 
-	$scope.clearReservationForm = function(){
+	/*$scope.clearReservationForm = function(){
 		$scope.fields.email = '';
 		$scope.fields.lastname1 = '';
 		$scope.fields.lastname2 = '';
@@ -134,20 +166,69 @@ App.getAppInstance().controller("modalController", ['$scope','$rootScope','$inte
 		
 		$interval.cancel($scope.timeInterval);
 		$scope.time = '00:10:00';
-	}
+	}*/
 
 }]);
-App.getAppInstance().controller("reservationController", ['$scope','$rootScope','$timeout','$http',function ($scope, $rootScope,$timeout,$http){
+
+App.getAppInstance().controller('ModalInstanceCtrl', function ($uibModalInstance, items) {
+	var $ctrl = this;
+	$ctrl.items = items;
+	$ctrl.selected = {
+	  item: $ctrl.items[0]
+	};
+  
+	$ctrl.ok = function () {
+	  $uibModalInstance.close($ctrl.selected.item);
+	};
+  
+	$ctrl.cancel = function () {
+	  $uibModalInstance.dismiss('cancel');
+	};
+  });
+  
+  // Please note that the close and dismiss bindings are from $uibModalInstance.
+  
+  App.getAppInstance().component('modalComponent', {
+	templateUrl: 'myModalContent.html',
+	bindings: {
+	  resolve: '<',
+	  close: '&',
+	  dismiss: '&'
+	},
+	controller: function () {
+	  var $ctrl = this;
+  
+	  $ctrl.$onInit = function () {
+		$ctrl.items = $ctrl.resolve.items;
+		$ctrl.selected = {
+		  item: $ctrl.items[0]
+		};
+	  };
+  
+	  $ctrl.ok = function () {
+		$ctrl.close({$value: $ctrl.selected.item});
+	  };
+  
+	  $ctrl.cancel = function () {
+		$ctrl.dismiss({$value: 'cancel'});
+	  };
+	}
+  });
+App.getAppInstance().controller("reservationController", ['$scope','$rootScope','$timeout','$http','$httpParamSerializer',function ($scope, $rootScope,$timeout,$http,$httpParamSerializer){
    $scope.timesForReservations = ['08-09','09-10','10-11','11-12','12-13','13-14','14-15','15-16','16-17','17-18','18-19','19-20','20-21','21-22','22-23','23-24'];
    $scope.times = ['08:00 a.m.','09:00 a.m.','10:00 a.m.','11:00 a.m.','12:00 m.d','01:00 p.m.','02:00 p.m.','03:00 p.m.','04:00 p.m.','05:00 p.m.','06:00 p.m.','07:00 p.m.','08:00 p.m.','09:00 p.m.','10:00 p.m.','11:00 p.m.'];
 	//var path = ( window.location.pathname.replace('/','').replace(/\/$/, '').split('/').length <= 2 ) ? './' : '../';
    $scope.roles = {'Admin':'1','Dependiente':'2'};
-   
+   $scope.dailyResevationsActive = false;
+   $scope.pitchsContainer = false;
+
    $rootScope.loadReservations = function (){
-   		angular.element('#loading-modal').modal('show');
-   		angular.element('#dailyResevations').hide();
+		//angular.element('#loading-modal').modal('show');
+		   
+		//angular.element('#dailyResevations').hide();
+		$scope.dailyResevationsActive = false;
    		
-	   	if( !angular.element('.day div.active').length ){
+	   	/*if( !angular.element('.day div.active').length ){
 			angular.element('.day div').first().addClass('active');
 			angular.element('.day div').first().parent().addClass('active');
 			angular.element('.day div').first().parents('.days_row').addClass('active');
@@ -156,13 +237,16 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 			angular.element('.day div.active').parent().addClass('active');
 			angular.element('.day div.active').parents('.days_row').addClass('active');
 		}
+		*/
+
 		//Set day as active day
-		var day = angular.element('.day div.active').text();
+		/*var day = angular.element('.day div.active').text();
 		angular.element('#day').val(day);
 
 		var daySelected = angular.element('#calendar .days_row.active .day').index(angular.element('#calendar .days_row.active .day.active'));
 						 
 		angular.element('#currentDay').html( angular.element('#calendar .days_head .head:eq('+daySelected+')').text() + ' ' +day);
+		*/
 
 		var req = {
 			method: 'POST',
@@ -170,7 +254,7 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
-		 	data: $.param( $scope.getDataForTemporaryReservation() ),
+		 	data: $httpParamSerializer( $scope.getDataForTemporaryReservation() ),
 		 	cache : false
 		}
 
@@ -180,9 +264,12 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 			//});
 			//console.log('CHRIS');
 			//$timeout(function(){
-				angular.element('#loading-modal').modal('hide');
+				//angular.element('#loading-modal').modal('hide');
 			//});
-			angular.element('#dailyResevations').show();
+
+			//angular.element('#dailyResevations').show();
+			$scope.dailyResevationsActive = true;
+			console.log('dailyResevations');
 	
 		},function(response) {
 		    // called asynchronously if an error occurs
@@ -198,7 +285,7 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
-		 	data: $.param( { group: $scope.getGroup() } ),
+		 	data: $httpParamSerializer( { group: $scope.getGroup() } ),
 		 	cache : false
 		}
 
@@ -206,14 +293,15 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 			//$timeout(function(){
 				$scope.pitchs = angular.fromJson(response.data);
 			//});
-			angular.element('#pitchs').show();
+			$scope.pitchsContainer = true;
+			//angular.element('#pitchs').show();
 	
 		},function(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		});
 
-		$scope.pitchValue = angular.element('#pitch').val();
+		//$scope.pitchValue = angular.element('#pitch').val();
 	}
 
 	$scope.sortReservations = function (data){
@@ -251,37 +339,42 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 	}
 
 	$scope.getGroup = function(){
-		var group = null;
-		$.ajax({
-
-			type: 'POST',
-
-			url : App.getBaseURL() + "getGroup",
-
-			data: { group_name: angular.element('#group').val() || window.location.pathname.replace('/','').replace(/\/$/, '').split('/')[1] },
-
+		var group;
+		var req = {
+			method: 'POST',
+			url: App.getBaseURL() + "getGroup",
+			headers: {
+			   	'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			data: { group_name: $scope.groupValue /*angular.element('#group').val()*/ || window.location.pathname.replace('/','').replace(/\/$/, '').split('/')[1] },
 			async : false,
+		 	cache : false
+		}
 
-			success : function(response){
-				group = jQuery.parseJSON(response)[0].id;
-			}
+		$http(req).then(function(response) {
+			var responseData = response.data;
+			group = angular.fromJson(responseData)[0].id;
+		},function(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
 		});
+
 		return group;
 	}
 
 	$scope.getPitch = function(){
-		return angular.element('#pitch').val() || window.location.pathname.replace('/','').replace(/\/$/, '').split('/')[2];
+		return $scope.pitchValue /*angular.element('#pitch').val()*/ || window.location.pathname.replace('/','').replace(/\/$/, '').split('/')[2];
 	}
 
 	$rootScope.getDataForTemporaryReservation = function(){
-		return { 	reservation_year : angular.element('#year').val(), 
-					reservation_month : angular.element('#month').val(), 
-					reservation_day : angular.element('#day').val(), 
+		return { 	reservation_year : $scope.yearValue,//$scope.yearValue, 
+					reservation_month : $scope.monthValue, //$scope.monthValue, 
+					reservation_day : $scope.dayValue, //$scope.dayValue, 
 					group_id : $scope.getGroup(), 
 					pitch_id : $scope.getPitch(),
-					team_id : angular.element('#team_id').val(),
-					reservation_time : angular.element('#reservation_time').val(),
-					id_user : ( angular.element('#id_user').val() ) ? angular.element('#id_user').val() : '0'
+					team_id : $scope.teamIDValue,//angular.element('#team_id').val(),
+					reservation_time : $scope.reservationTimeValue,//angular.element('#reservation_time').val(),
+					id_user : 0//( angular.element('#id_user').val() ) ? angular.element('#id_user').val() : '0'
 				};
 	}
 
@@ -306,7 +399,7 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
-		 	data: $.param( data ),
+		 	data: $httpParamSerializer( data ),
 		 	cache : false
 		}
 
@@ -317,19 +410,24 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 	}
 
 	$scope.getDateFromServer = function(){
-		$.ajax({
-
-			type: 'POST',
-
-			url : App.getBaseURL() + "getDateFromServer",
-
+		var req = {
+			method: 'POST',
+			url: App.getBaseURL() + "getDateFromServer",
+			headers: {
+			   	'Content-Type': 'application/x-www-form-urlencoded'
+			},
 			async : false,
+		 	cache : false
+		}
 
-			success : function(response){
-				$timeout(function(){
-					$scope.dateFromServer = ( !!Date.parse(response) ) ? response : response.replace(/-/g,'/') + ' GMT';
-				});
-			}
+		$http(req).then(function(response) {
+			var responseData = response.data;
+			$timeout(function(){
+				$scope.dateFromServer = ( !!Date.parse(responseData) ) ? responseData : responseData.replace(/-/g,'/') + ' GMT';
+			});
+		},function(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
 		});
 	}
 
@@ -352,11 +450,11 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 	}
 
 	$rootScope.isDateForBookingValid = function(){
-		return  new Date(angular.element('#year').val(),angular.element('#month').val() - 1,angular.element('#day').val(),'23','59','59') > new Date($scope.dateFromServer);
+		return  new Date($scope.yearValue,$scope.monthValue - 1,$scope.dayValue,'23','59','59') > new Date($scope.dateFromServer);
 	}
 
 	$rootScope.isAdminUser = function(){
-		return ( !!angular.element('#isAdminUser').val() && /admin/.test(location.href) );
+		return ( /*!!angular.element('#isAdminUser').val()*/ !!$scope.isAdminUserValue && /admin/.test(location.href) );
 	}
 
 	$rootScope.getRol = function(){
@@ -378,10 +476,10 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 			reservation_month,
 			reservation_year;
 
-		data.push([angular.element('#day').val(),angular.element('#month').val(),angular.element('#year').val()]);	
+		data.push([$scope.dayValue,$scope.monthValue,$scope.yearValue]);	
 		for(var i = range; i<= daysPerYear ; i++){
-			var from = new Date(angular.element('#year').val(),angular.element('#month').val() - 1,angular.element('#day').val());
-			var to = new Date(angular.element('#year').val(),angular.element('#month').val() - 1,angular.element('#day').val());
+			var from = new Date($scope.yearValue,$scope.monthValue - 1,$scope.dayValue);
+			var to = new Date($scope.yearValue,$scope.monthValue - 1,$scope.dayValue);
 			to.setDate(from.getDate() + i);
 			if( i % daysPerWeek  == 0 ){
 				reservation_day = to.getDate().toString();
@@ -394,20 +492,20 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 	}
 
 	$rootScope.sendEmail = function(data){
-		angular.element('#sending-email-modal').modal('show');
+		//angular.element('#sending-email-modal').modal('show');
 		var req = {
 			method: 'POST',
 			url: App.getBaseURL() + "sendEmail",
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
-		 	data: $.param( data ),
+		 	data: $httpParamSerializer( data ),
 		 	cache : false
 		}
 
 		$http(req).then(function(response) {
 			//angular.element('#loading-modal').modal('hide');
-			angular.element('#sending-email-modal').modal('hide');
+			//angular.element('#sending-email-modal').modal('hide');
 			$scope.loadReservations();
 	
 		},function(response) {
@@ -417,20 +515,20 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 	}
 
 	$rootScope.sendSMS = function(data){
-		angular.element('#sending-sms-modal').modal('show');
+		//angular.element('#sending-sms-modal').modal('show');
 		var req = {
 			method: 'POST',
 			url: App.getBaseURL() + "sendSMS",
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
-		 	data: $.param( data ),
+		 	data: $httpParamSerializer( data ),
 		 	cache : false
 		}
 
 		$http(req).then(function(response) {
 			//angular.element('#loading-modal').modal('hide');
-			angular.element('#sending-sms-modal').modal('hide');
+			//angular.element('#sending-sms-modal').modal('hide');
 			$scope.loadReservations();
 	
 		}).error(function(response) {
@@ -476,12 +574,14 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 
 	$scope.loadReservations();
 	$scope.loadPitchsPagination();
+
+	$rootScope.onClickParentContainer = function(){
+		console.log('Click Parent Container');
+		App.setLeavePageConfirmation(true);
+	};
 }]);
 
-angular.element(document).ready(function(){
-	angular.element('body').delegate('a','click', function(){
-		App.setLeavePageConfirmation(true);
-	});
+/*angular.element(document).ready(function(){
 
 	angular.element('#calendar .header').on('mouseenter', function(){
 		angular.element('.days_head, .days_row').show();
@@ -494,7 +594,7 @@ angular.element(document).ready(function(){
 	angular.element('#calendar').on('mouseleave', function(){
 		angular.element('.days_head, .days_row').hide();
 	});
-});
+});*/
 
 App.getAppInstance().directive('loadDay', ['$document', function($document) {
     return function(scope, element, attr) {
@@ -505,8 +605,11 @@ App.getAppInstance().directive('loadDay', ['$document', function($document) {
         angular.element('.days_row').removeClass('active');
         angular.element(element).addClass('active');
         angular.element(element).parent().addClass('active');
-        angular.element(element).parents('.days_row').addClass('active');
-        angular.element('#dailyResevations').hide();
+		angular.element(element).parents('.days_row').addClass('active');
+		
+		//angular.element('#dailyResevations').hide();
+		scope.dailyResevationsActive = false;
+
         scope.loadReservations();
       });
 
@@ -514,11 +617,11 @@ App.getAppInstance().directive('loadDay', ['$document', function($document) {
   }]);
 
 
-App.getAppInstance().directive('available', ['$document','$http','$timeout', function($document,$http,$timeout) {
+App.getAppInstance().directive('available', ['$document','$http','$timeout','$httpParamSerializer', function($document,$http,$timeout,$httpParamSerializer) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
-        angular.element('#loading-modal').modal('show');
+        //angular.element('#loading-modal').modal('show');
         angular.element('#team_id').val(attr.team);
         angular.element('#reservation_time').val(angular.element(element).siblings('.reservation-time').attr('data-time'));
 
@@ -543,12 +646,12 @@ App.getAppInstance().directive('available', ['$document','$http','$timeout', fun
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
-		 	data: $.param( scope.getDataForTemporaryReservation() ),
+		 	data: $httpParamSerializer( scope.getDataForTemporaryReservation() ),
 		 	cache : false
 		}
 
 		$http(req).then(function(response) {
-			angular.element('#loading-modal').modal('hide');
+			//angular.element('#loading-modal').modal('hide');
 			var dataResponse = angular.fromJson(response.data);
 			var state = 0;
 			/*
@@ -563,10 +666,10 @@ App.getAppInstance().directive('available', ['$document','$http','$timeout', fun
 
 			switch(state){
 				case '1':
-					angular.element('#reservation-watching-by-other-user-modal').modal('show');
+					//angular.element('#reservation-watching-by-other-user-modal').modal('show');
 				break;
 				case '2':
-					angular.element('#reservation-in-use-by-other-user-modal').modal('show');
+					//angular.element('#reservation-in-use-by-other-user-modal').modal('show');
 				break;
 				case '3':
 				case '4':
@@ -574,7 +677,7 @@ App.getAppInstance().directive('available', ['$document','$http','$timeout', fun
 					data.state = '1'; 
 					scope.setStateTemporaryReservation(data);
 
-					angular.element('#formReservationModal').modal('show');
+					//angular.element('#formReservationModal').modal('show');
 					var daySelected = angular.element('#calendar .days_row.active .day').index(angular.element('#calendar .days_row.active .day.active'));
 					angular.element('#reservationInfo').html(angular.element('#calendar .days_head .head:eq('+daySelected+')').text() + ' ' + angular.element('#day').val()+'/'+angular.element('#month').val()+'/'+angular.element('#year').val() + ' ' + angular.element(element).siblings('.reservation-time ').text());
 					if( scope.isAdminUser() ){
@@ -587,7 +690,7 @@ App.getAppInstance().directive('available', ['$document','$http','$timeout', fun
 				case '5':
 					
 					//location.reload();
-					angular.element('#formReservationModal').modal('hide');
+					//angular.element('#formReservationModal').modal('hide');
 					//angular.element('#already-reserved-modal').modal('show');
 					alert('Esta casilla ya fue reservada. Por favor escoja otra casilla para reservar');
 					scope.loadReservations();
@@ -609,11 +712,11 @@ App.getAppInstance().directive('available', ['$document','$http','$timeout', fun
 	}
   }]);
 
-App.getAppInstance().directive('bookingOnLine', ['$document','$http','$interval', function($document,$http, $interval) {
+App.getAppInstance().directive('bookingOnLine', ['$document','$http','$interval','$httpParamSerializer', function($document,$http, $interval,$httpParamSerializer) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
-        angular.element('#loading-modal').modal('show');
+        //angular.element('#loading-modal').modal('show');
         var data = scope.getDataForTemporaryReservation();
 
 		var req = {
@@ -622,20 +725,20 @@ App.getAppInstance().directive('bookingOnLine', ['$document','$http','$interval'
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
-		 	data: $.param( data ),
+		 	data: $httpParamSerializer( data ),
 		 	cache : false
 		}
 
 		$http(req).then(function(response) {
 			var dataResponse = angular.fromJson(response.data)
-			angular.element('#loading-modal').modal('hide');
+			//angular.element('#loading-modal').modal('hide');
 			console.log('CHRIS');
 			if(dataResponse.length){
 				data.state = '5';// Reservada
 				scope.setStateTemporaryReservation(data);
 				
 				//location.reload();
-				angular.element('#formReservationModal').modal('hide');
+				//angular.element('#formReservationModal').modal('hide');
 				//angular.element('#already-reserved-modal').modal('show');
 				alert('Esta casilla ya fue reservada. Por favor escoja otra casilla para reservar');
 				scope.loadReservations();
@@ -681,11 +784,11 @@ App.getAppInstance().directive('bookingOnLine', ['$document','$http','$interval'
 	}
   }]);
 
-App.getAppInstance().directive('reserveBtn', ['$document','$http','$filter', function($document,$http,$filter) {
+App.getAppInstance().directive('reserveBtn', ['$document','$http','$filter','$httpParamSerializer', function($document,$http,$filter,$httpParamSerializer) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
-        angular.element('#loading-modal').modal('show');
+        //angular.element('#loading-modal').modal('show');
         if( scope.bookingForm.$valid ){
         	//console.log('valido');
 
@@ -701,7 +804,7 @@ App.getAppInstance().directive('reserveBtn', ['$document','$http','$filter', fun
 					headers: {
 					   	'Content-Type': 'application/x-www-form-urlencoded'
 					},
-				 	data: $.param( data ),
+				 	data: $httpParamSerializer( data ),
 				 	cache : false
 				}
 
@@ -713,7 +816,7 @@ App.getAppInstance().directive('reserveBtn', ['$document','$http','$filter', fun
 						//location.reload();
 						//scope.$parent.successReservation = true;
 
-						angular.element('#formReservationModal').modal('hide');
+						//angular.element('#formReservationModal').modal('hide');
 						if( !!data.phone){
 							scope.sendSMS({	'phone' : data.phone,
 												'data_reservation' : 'F5 confirma Reserva:'
@@ -769,7 +872,7 @@ App.getAppInstance().directive('reserveBtn', ['$document','$http','$filter', fun
 												+ '<img src="f5.cr' + App.getBaseURL() + 'img/logo.png"/>'
 											});
 						}else{
-							angular.element('#loading-modal').modal('hide');
+							//angular.element('#loading-modal').modal('hide');
 							scope.loadReservations();
 						}
 
@@ -779,8 +882,8 @@ App.getAppInstance().directive('reserveBtn', ['$document','$http','$filter', fun
 				});				
 			}
 			else{
-				angular.element('#loading-modal').modal('hide');
-				angular.element('#set-pitch-all-weeks-modal').modal('show');
+				//angular.element('#loading-modal').modal('hide');
+				//angular.element('#set-pitch-all-weeks-modal').modal('show');
 				var tmp = {
 					reservation_day : data.reservation_day,
 					reservation_month : data.reservation_month,
@@ -801,13 +904,13 @@ App.getAppInstance().directive('reserveBtn', ['$document','$http','$filter', fun
 					headers: {
 					   	'Content-Type': 'application/x-www-form-urlencoded'
 					},
-				 	data: $.param( data ),
+				 	data: $httpParamSerializer( data ),
 				 	cache : false
 				}
 
 				$http(req).then(function(response) {
-					angular.element('#formReservationModal').modal('hide');
-					angular.element('#set-pitch-all-weeks-modal').modal('hide');
+					//angular.element('#formReservationModal').modal('hide');
+					//angular.element('#set-pitch-all-weeks-modal').modal('hide');
 					//scope.loadReservations();
 
 					if( !!data.phone){
@@ -894,7 +997,7 @@ App.getAppInstance().directive('reserveBtn', ['$document','$http','$filter', fun
         else{
         	//console.log('invalido');
         	alert("Por favor ingrese correctamente los datos erróneos en el formulario");
-        	angular.element('#loading-modal').modal('hide');
+        	//angular.element('#loading-modal').modal('hide');
         }
         
       });
@@ -906,11 +1009,11 @@ App.getAppInstance().directive('reserveBtn', ['$document','$http','$filter', fun
 	}
   }]);
 
-App.getAppInstance().directive('showInfo', ['$document','$timeout','$http', function($document,$timeout,$http) {
+App.getAppInstance().directive('showInfo', ['$document','$timeout','$http','$httpParamSerializer', function($document,$timeout,$http,$httpParamSerializer) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
-        angular.element('#loading-modal').modal('show');
+        //angular.element('#loading-modal').modal('show');
 
         angular.element('#team_id').val(attr.team);
         angular.element('#reservation_time').val(angular.element(element).siblings('.reservation-time').attr('data-time'));
@@ -921,16 +1024,16 @@ App.getAppInstance().directive('showInfo', ['$document','$timeout','$http', func
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
-		 	data: $.param( scope.getDataForTemporaryReservation() ),
+		 	data: $httpParamSerializer( scope.getDataForTemporaryReservation() ),
 		 	cache : false
 		}
 
 		$http(req).then(function(response) {
-			angular.element('#loading-modal').modal('hide');
+			//angular.element('#loading-modal').modal('hide');
 			//$timeout(function(){
 				scope.$root.completeInfo = angular.fromJson(response.data)[0];
 			//});
-			angular.element('#show-info-modal').modal('show');
+			//angular.element('#show-info-modal').modal('show');
 	
 		},function(response) {
 		    // called asynchronously if an error occurs
@@ -945,11 +1048,11 @@ App.getAppInstance().directive('showInfo', ['$document','$timeout','$http', func
 	}
   }]);
 
-App.getAppInstance().directive('delete', ['$document','$http', function($document,$http) {
+App.getAppInstance().directive('delete', ['$document','$http','$httpParamSerializer', function($document,$http,$httpParamSerializer) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
-        angular.element('#loading-modal').modal('show');
+        //angular.element('#loading-modal').modal('show');
 
         angular.element(element).addClass('active');
         if(confirm("Realmemente desea eliminar este registro?")){
@@ -964,13 +1067,13 @@ App.getAppInstance().directive('delete', ['$document','$http', function($documen
 					headers: {
 					   	'Content-Type': 'application/x-www-form-urlencoded'
 					},
-				 	data: $.param( data ),
+				 	data: $httpParamSerializer( data ),
 				 	cache : false
 				}
 
 				$http(req).then(function(response) {
 					//alert('Registro Eliminado');
-					angular.element('#loading-modal').modal('hide');
+					//angular.element('#loading-modal').modal('hide');
 					scope.loadReservations();
 			
 				},function(response) {
@@ -985,13 +1088,13 @@ App.getAppInstance().directive('delete', ['$document','$http', function($documen
 					headers: {
 					   	'Content-Type': 'application/x-www-form-urlencoded'
 					},
-				 	data: $.param( { id_group_all_weeks: scope.completeInfo.id_group_all_weeks } ),
+				 	data: $httpParamSerializer( { id_group_all_weeks: scope.completeInfo.id_group_all_weeks } ),
 				 	cache : false
 				}
 
 				$http(req).then(function(response) {
 					//alert('Registro Eliminado');
-					angular.element('#loading-modal').modal('hide');
+					//angular.element('#loading-modal').modal('hide');
 					scope.loadReservations();
 			
 				},function(response) {
@@ -1001,7 +1104,7 @@ App.getAppInstance().directive('delete', ['$document','$http', function($documen
 			}
         }
         else{
-        	angular.element('#loading-modal').modal('hide');
+        	//angular.element('#loading-modal').modal('hide');
         }
         angular.element(element).removeClass('active');
 
@@ -1018,15 +1121,15 @@ App.getAppInstance().directive('delete', ['$document','$http', function($documen
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
-        angular.element('#loading-modal').modal('show');
+        //angular.element('#loading-modal').modal('show');
 
 		$http.get(App.getBaseURL() + "getClientsData").
 		  success(function(data, status, headers, config) {
-		    angular.element('#loading-modal').modal('hide');
+		    //angular.element('#loading-modal').modal('hide');
 		 	//$timeout(function(){
 				scope.$root.clients = angular.fromJson(data);
 			//});
-			angular.element('#search-modal').modal('show');
+			//angular.element('#search-modal').modal('show');
 			scope.$parent.selectUserMode = false;
 		  }).
 		  error(function(data, status, headers, config) {
@@ -1047,14 +1150,14 @@ App.getAppInstance().directive('delete', ['$document','$http', function($documen
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
-        angular.element('#loading-modal').modal('show');
+        //angular.element('#loading-modal').modal('show');
         $http.get(App.getBaseURL() + "getClientsData").
 		  success(function(data, status, headers, config) {
-		    angular.element('#loading-modal').modal('hide');
+		    //angular.element('#loading-modal').modal('hide');
 		 	//$timeout(function(){
 				scope.$root.clients = angular.fromJson(data);
 			//});
-			angular.element('#search-modal').modal('show');
+			//angular.element('#search-modal').modal('show');
 			scope.$parent.selectUserMode = true;
 		  }).
 		  error(function(data, status, headers, config) {
@@ -1070,11 +1173,11 @@ App.getAppInstance().directive('delete', ['$document','$http', function($documen
 	}
   }]);
 
-  App.getAppInstance().directive('changePasswordBtn', ['$document','$http', function($document,$http) {
+  App.getAppInstance().directive('changePasswordBtn', ['$document','$http','$httpParamSerializer', function($document,$http,$httpParamSerializer) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
-        angular.element('#loading-modal').modal('show');
+        //angular.element('#loading-modal').modal('show');
         var data = {
         	'user' : scope.fields.userAccountToEdit,
         	'password' : scope.fields.password,
@@ -1088,14 +1191,14 @@ App.getAppInstance().directive('delete', ['$document','$http', function($documen
 				headers: {
 				   	'Content-Type': 'application/x-www-form-urlencoded'
 				},
-			 	data: $.param( data ),
+			 	data: $httpParamSerializer( data ),
 			 	cache : false
 			}
 
 			$http(req).then(function(response) {
-				angular.element('#loading-modal').modal('hide');
+				//angular.element('#loading-modal').modal('hide');
 				alert("La cuenta se ha actualizado satisfactoriamente. Nota: Debe deslogearse y volver a logearse con la cuenta moficada para visualizar los cambios");
-				angular.element('#edit-account-modal').modal('hide');
+				//angular.element('#edit-account-modal').modal('hide');
 				
 				$http.get(App.getBaseURL() + "getAccountsData").then(function(response) {
 				 	//$timeout(function(){
@@ -1130,15 +1233,15 @@ App.getAppInstance().directive('delete', ['$document','$http', function($documen
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
-        angular.element('#search-modal').modal('hide');
-        angular.element('#loading-modal').modal('show');
+        //angular.element('#search-modal').modal('hide');
+        //angular.element('#loading-modal').modal('show');
         var rowClient = angular.element('input[name="client"]:checked').parents('.rowClient');
         scope.fields.name = rowClient.find('.clientName').val();
         scope.fields.lastname1 = rowClient.find('.clientLastName').val().split(' ')[0];
         scope.fields.lastname2 = rowClient.find('.clientLastName').val().split(' ')[1];
         scope.fields.email = rowClient.find('.clientEmail').val();
         scope.fields.phone = rowClient.find('.clientPhone').val();
-        angular.element('#loading-modal').modal('hide');
+        //angular.element('#loading-modal').modal('hide');
        });
     }
     return {
@@ -1149,12 +1252,12 @@ App.getAppInstance().directive('delete', ['$document','$http', function($documen
   }]);
 
 
-  App.getAppInstance().directive('checkAvailabilityBtn', ['$document','$timeout','$http', function($document,$timeout,$http) {
+  App.getAppInstance().directive('checkAvailabilityBtn', ['$document','$timeout','$http','$httpParamSerializer', function($document,$timeout,$http,$httpParamSerializer) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
 
-       	angular.element('#loading-modal').modal('show');
+       	//angular.element('#loading-modal').modal('show');
 		var data = scope.getDataForTemporaryReservation();
 			data['dates'] = scope.calculateDayPerWeek();
 
@@ -1170,7 +1273,7 @@ App.getAppInstance().directive('delete', ['$document','$http', function($documen
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
-		 	data: $.param( data ),
+		 	data: $httpParamSerializer( data ),
 		 	cache : false
 		}
 
@@ -1184,8 +1287,8 @@ App.getAppInstance().directive('delete', ['$document','$http', function($documen
 			//$timeout(function(){
 				scope.$root.daysAvailables = result;
 			//});
-			angular.element('#loading-modal').modal('hide');
-			angular.element('#check-availability-modal').modal('show');
+			//angular.element('#loading-modal').modal('hide');
+			//angular.element('#check-availability-modal').modal('show');
 
 		},function(response) {
 		    // called asynchronously if an error occurs
@@ -1239,7 +1342,7 @@ App.getAppInstance().directive('returnToFormReservation', ['$document', function
 	}
   }]);
 
-App.getAppInstance().directive('reserveAndPayBtn', ['$document','$http','$timeout', function($document,$http,$timeout) {
+App.getAppInstance().directive('reserveAndPayBtn', ['$document','$http','$timeout','$httpParamSerializer', function($document,$http,$timeout,$httpParamSerializer) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
@@ -1253,22 +1356,22 @@ App.getAppInstance().directive('reserveAndPayBtn', ['$document','$http','$timeou
 			data.first_name = scope.fields.name;
 			data.last_name = scope.fields.lastname1;
 
-        	angular.element('#processing-card-modal').modal('show');
+        	//angular.element('#processing-card-modal').modal('show');
         	var req = {
 				method: 'POST',
 				url: App.getBaseURL() + "acceptCreditCardPayment",
 				headers: {
 				   	'Content-Type': 'application/x-www-form-urlencoded'
 				},
-			 	data: $.param( data ),
+			 	data: $httpParamSerializer( data ),
 			 	cache : false
 			}
 
 			$http(req).then(function(response) {
 				var dataResponse = response.data;
-				angular.element('#processing-card-modal').modal('hide');
+				//angular.element('#processing-card-modal').modal('hide');
 				if( dataResponse.state == "approved" ){
-					angular.element('#formReservationModal').modal('hide');
+					//angular.element('#formReservationModal').modal('hide');
 					$timeout(function(){
 							angular.element('#reserveAfterPayBtn').trigger('click');
 					});
@@ -1298,14 +1401,14 @@ App.getAppInstance().directive('reserveAndPayBtn', ['$document','$http','$timeou
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
-        angular.element('#loading-modal').modal('show');
+        //angular.element('#loading-modal').modal('show');
         $http.get(App.getBaseURL() + "getAccountsData").
 		  success(function(data, status, headers, config) {
-		    angular.element('#loading-modal').modal('hide');
+		    //angular.element('#loading-modal').modal('hide');
 		 	//$timeout(function(){
 				scope.$root.accounts = angular.fromJson(data);
 			//});
-			angular.element('#show-accounts-modal').modal('show');
+			//angular.element('#show-accounts-modal').modal('show');
 		  }).
 		  error(function(data, status, headers, config) {
 		    // called asynchronously if an error occurs
@@ -1324,7 +1427,7 @@ App.getAppInstance().directive('reserveAndPayBtn', ['$document','$http','$timeou
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
-        angular.element('#edit-account-modal').modal('show');
+        //angular.element('#edit-account-modal').modal('show');
         //console.log(attr.value);
         $timeout(function(){
         	scope.fields.nameAccountToEdit = attr.accountnametoedit;
@@ -1339,11 +1442,11 @@ App.getAppInstance().directive('reserveAndPayBtn', ['$document','$http','$timeou
 	}
   }]);
 
-  App.getAppInstance().directive('updateRatesBtn', ['$document','$http', function($document,$http) {
+  App.getAppInstance().directive('updateRatesBtn', ['$document','$http','$httpParamSerializer', function($document,$http,$httpParamSerializer) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
-        angular.element('#loading-modal').modal('show');
+        //angular.element('#loading-modal').modal('show');
 
         var updatedRates = [];
 		angular.element('form[name="changeRatesForm"] tr.rates').each(function(){
@@ -1363,14 +1466,14 @@ App.getAppInstance().directive('reserveAndPayBtn', ['$document','$http','$timeou
 				headers: {
 				   	'Content-Type': 'application/x-www-form-urlencoded'
 				},
-			 	data:  $.param({updatedRates : angular.toJson(updatedRates)}),
+			 	data:  $httpParamSerializer({updatedRates : angular.toJson(updatedRates)}),
 			 	cache : false
 			}
 
 			$http(req).then(function(response) {
-				angular.element('#loading-modal').modal('hide');
+				//angular.element('#loading-modal').modal('hide');
 				alert("Las tarifas han sido actualizados");
-				angular.element('#edit-rates-modal').modal('hide');
+				//angular.element('#edit-rates-modal').modal('hide');
 				scope.getRates();
 		
 			},function(responseg) {
@@ -1391,11 +1494,11 @@ App.getAppInstance().directive('reserveAndPayBtn', ['$document','$http','$timeou
 	}
   }]);
 
-App.getAppInstance().directive('saveBookingEdited', ['$document','$http', function($document,$http) {
+App.getAppInstance().directive('saveBookingEdited', ['$document','$http','$httpParamSerializer', function($document,$http,$httpParamSerializer) {
     function link(scope, element, attr) {
       element.on('click', function(event) {
         event.preventDefault();
-        angular.element('#loading-modal').modal('show');
+        //angular.element('#loading-modal').modal('show');
 
 		if(!scope.fields.editAllCccurrences){
         	var req = {
@@ -1404,13 +1507,13 @@ App.getAppInstance().directive('saveBookingEdited', ['$document','$http', functi
 				headers: {
 				   	'Content-Type': 'application/x-www-form-urlencoded'
 				},
-			 	data: $.param(scope.completeInfo),
+			 	data: $httpParamSerializer(scope.completeInfo),
 			 	cache : false
 			}
 
 			$http(req).then(function(response) {
 				//alert('Registro Eliminado');
-				angular.element('#loading-modal').modal('hide');
+				//angular.element('#loading-modal').modal('hide');
 				scope.loadReservations();
 		
 			},function(response) {
@@ -1424,13 +1527,13 @@ App.getAppInstance().directive('saveBookingEdited', ['$document','$http', functi
 				headers: {
 				   	'Content-Type': 'application/x-www-form-urlencoded'
 				},
-			 	data: $.param(scope.completeInfo),
+			 	data: $httpParamSerializer(scope.completeInfo),
 			 	cache : false
 			}
 
 			$http(req).then(function(response) {
 				//alert('Registro Eliminado');
-				angular.element('#loading-modal').modal('hide');
+				//angular.element('#loading-modal').modal('hide');
 				scope.loadReservations();
 		
 			},function(response) {

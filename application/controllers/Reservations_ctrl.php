@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Calendar extends CI_Controller {
+class Reservations_ctrl extends CI_Controller {
 
     public function __construct()
     {
@@ -59,12 +59,12 @@ class Calendar extends CI_Controller {
 
         {table_close}</table>{/table_close}';
         $this->load->library('calendar', $prefs);
-        $this->load->model("apim");
+        $this->load->model("Api_model");
     }
 
 
 
-    public function calendar($year = null, $month = null){
+    public function reservations($year = null, $month = null){
 
         if($this->session->userdata('logged_in'))
         {
@@ -74,7 +74,7 @@ class Calendar extends CI_Controller {
             $headerOptions = simplexml_load_file("xml/header.xml");
             $this->load->view('includes/header', $headerOptions->internal);
             $this->load->view('includes/userStatus');
-            $this->load->view('calendar_view', $data);
+            $this->load->view('reservations_view', $data);
 
             $footerOptions = simplexml_load_file("xml/footer.xml");
 
@@ -100,7 +100,7 @@ class Calendar extends CI_Controller {
             $rol = $session_data['rol'];
             $groupManager = $session_data['groupManager'];
 
-            if( $this->apim->getGroup($this->uri->segment(1))[0]->id != $groupManager && $rol == $this->apim->getIdRol('Dependiente')[0]->id){
+            if( $this->Api_model->getGroup($this->uri->segment(1))[0]->id != $groupManager && $rol == $this->Api_model->getIdRol('Dependiente')[0]->id){
                 redirect($this->uri->segment(1) . '/accesoDenegado');
             }
 
@@ -110,7 +110,7 @@ class Calendar extends CI_Controller {
             $this->load->view('includes/header', $headerOptions->internal);
             $session['session_data'] = $this->session->userdata('logged_in');
             $this->load->view('includes/userStatus', $session );
-            $this->load->view('calendar_view', $data);
+            $this->load->view('reservations_view', $data);
             
             $footerOptions = simplexml_load_file("xml/footer.xml");
 
@@ -132,5 +132,5 @@ class Calendar extends CI_Controller {
 
 }
 
-/* End of file calendar_controller.php */
-/* Location: ./application/controllers/calendar_controller.php */
+/* End of file Reservations_ctrl.php */
+/* Location: ./application/controllers/Reservations_ctrl.php */

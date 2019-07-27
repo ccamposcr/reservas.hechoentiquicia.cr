@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Apim extends CI_MODEL
+class Api_model extends CI_MODEL
 {
     function getReservationByTime($team_id,$reservation_year,$reservation_month,$reservation_day,$reservation_time,$group_id,$pitch_id){
         $query = $this->db->query("SELECT * FROM t_reservations WHERE team_id = ".$this->db->escape($team_id)." AND reservation_year = ".$this->db->escape($reservation_year)." AND reservation_month = ".$this->db->escape($reservation_month)." AND reservation_day = ".$this->db->escape($reservation_day)." AND reservation_time = ".$this->db->escape($reservation_time)." AND group_id = ".$this->db->escape($group_id)." AND pitch_id = ".$this->db->escape($pitch_id)." AND active ='1'");

@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Pages extends CI_Controller {
+class Pages_ctrl extends CI_Controller {
     function __construct() {
         parent::__construct();
     }
@@ -32,4 +32,4 @@ class Pages extends CI_Controller {
     }
 }
 /* End of file home_controller.php */
-/* Location: ./application/controllers/home_controller.php */
+/* Location: ./application/controllers/pages_ctrl.php */

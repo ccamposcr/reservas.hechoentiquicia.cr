@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Login extends CI_Controller {
+class Login_ctrl extends CI_Controller {
 	 function __construct() {
         parent::__construct();
-        $this->load->model('loginm','',true);
+        $this->load->model('Login_model','',true);
     }
 
     function index() {
@@ -79,4 +79,4 @@ class Login extends CI_Controller {
       }
 }
 /* End of file login_view.php */
-/* Location: ./application/controllers/login_view.php */
+/* Location: ./application/controllers/Login_ctrl.php */

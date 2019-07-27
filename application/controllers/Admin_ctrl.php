@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Admin extends CI_Controller {
+class Admin_ctrl extends CI_Controller {
     function __construct() {
         parent::__construct();
-        //$this->load->model('login_model','',true);
+        //$this->load->model('Login_model','',true);
     }
  
    /* function index() {
@@ -27,4 +27,4 @@ class Admin extends CI_Controller {
  
 }
 /* End of file c_home.php */
-/* Location: ./application/controllers/c_home.php */
+/* Location: ./application/controllers/Admin_ctrl.php */

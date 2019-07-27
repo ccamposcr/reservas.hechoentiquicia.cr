@@ -1,14 +1,18 @@
-App.getAppInstance().controller("reservationController", ['$scope','$rootScope','$timeout','$http',function ($scope, $rootScope,$timeout,$http){
+App.getAppInstance().controller("reservationController", ['$scope','$rootScope','$timeout','$http','$httpParamSerializer',function ($scope, $rootScope,$timeout,$http,$httpParamSerializer){
    $scope.timesForReservations = ['08-09','09-10','10-11','11-12','12-13','13-14','14-15','15-16','16-17','17-18','18-19','19-20','20-21','21-22','22-23','23-24'];
    $scope.times = ['08:00 a.m.','09:00 a.m.','10:00 a.m.','11:00 a.m.','12:00 m.d','01:00 p.m.','02:00 p.m.','03:00 p.m.','04:00 p.m.','05:00 p.m.','06:00 p.m.','07:00 p.m.','08:00 p.m.','09:00 p.m.','10:00 p.m.','11:00 p.m.'];
 	//var path = ( window.location.pathname.replace('/','').replace(/\/$/, '').split('/').length <= 2 ) ? './' : '../';
    $scope.roles = {'Admin':'1','Dependiente':'2'};
-   
+   $scope.dailyResevationsActive = false;
+   $scope.pitchsContainer = false;
+
    $rootScope.loadReservations = function (){
-   		angular.element('#loading-modal').modal('show');
-   		angular.element('#dailyResevations').hide();
+		//angular.element('#loading-modal').modal('show');
+		   
+		//angular.element('#dailyResevations').hide();
+		$scope.dailyResevationsActive = false;
    		
-	   	if( !angular.element('.day div.active').length ){
+	   	/*if( !angular.element('.day div.active').length ){
 			angular.element('.day div').first().addClass('active');
 			angular.element('.day div').first().parent().addClass('active');
 			angular.element('.day div').first().parents('.days_row').addClass('active');
@@ -17,13 +21,16 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 			angular.element('.day div.active').parent().addClass('active');
 			angular.element('.day div.active').parents('.days_row').addClass('active');
 		}
+		*/
+
 		//Set day as active day
-		var day = angular.element('.day div.active').text();
+		/*var day = angular.element('.day div.active').text();
 		angular.element('#day').val(day);
 
 		var daySelected = angular.element('#calendar .days_row.active .day').index(angular.element('#calendar .days_row.active .day.active'));
 						 
 		angular.element('#currentDay').html( angular.element('#calendar .days_head .head:eq('+daySelected+')').text() + ' ' +day);
+		*/
 
 		var req = {
 			method: 'POST',
@@ -31,7 +38,7 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
-		 	data: $.param( $scope.getDataForTemporaryReservation() ),
+		 	data: $httpParamSerializer( $scope.getDataForTemporaryReservation() ),
 		 	cache : false
 		}
 
@@ -41,9 +48,12 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 			//});
 			//console.log('CHRIS');
 			//$timeout(function(){
-				angular.element('#loading-modal').modal('hide');
+				//angular.element('#loading-modal').modal('hide');
 			//});
-			angular.element('#dailyResevations').show();
+
+			//angular.element('#dailyResevations').show();
+			$scope.dailyResevationsActive = true;
+			console.log('dailyResevations');
 	
 		},function(response) {
 		    // called asynchronously if an error occurs
@@ -59,7 +69,7 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
-		 	data: $.param( { group: $scope.getGroup() } ),
+		 	data: $httpParamSerializer( { group: $scope.getGroup() } ),
 		 	cache : false
 		}
 
@@ -67,14 +77,15 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 			//$timeout(function(){
 				$scope.pitchs = angular.fromJson(response.data);
 			//});
-			angular.element('#pitchs').show();
+			$scope.pitchsContainer = true;
+			//angular.element('#pitchs').show();
 	
 		},function(response) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		});
 
-		$scope.pitchValue = angular.element('#pitch').val();
+		//$scope.pitchValue = angular.element('#pitch').val();
 	}
 
 	$scope.sortReservations = function (data){
@@ -112,37 +123,42 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 	}
 
 	$scope.getGroup = function(){
-		var group = null;
-		$.ajax({
-
-			type: 'POST',
-
-			url : App.getBaseURL() + "getGroup",
-
-			data: { group_name: angular.element('#group').val() || window.location.pathname.replace('/','').replace(/\/$/, '').split('/')[1] },
-
+		var group;
+		var req = {
+			method: 'POST',
+			url: App.getBaseURL() + "getGroup",
+			headers: {
+			   	'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			data: { group_name: $scope.groupValue /*angular.element('#group').val()*/ || window.location.pathname.replace('/','').replace(/\/$/, '').split('/')[1] },
 			async : false,
+		 	cache : false
+		}
 
-			success : function(response){
-				group = jQuery.parseJSON(response)[0].id;
-			}
+		$http(req).then(function(response) {
+			var responseData = response.data;
+			group = angular.fromJson(responseData)[0].id;
+		},function(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
 		});
+
 		return group;
 	}
 
 	$scope.getPitch = function(){
-		return angular.element('#pitch').val() || window.location.pathname.replace('/','').replace(/\/$/, '').split('/')[2];
+		return $scope.pitchValue /*angular.element('#pitch').val()*/ || window.location.pathname.replace('/','').replace(/\/$/, '').split('/')[2];
 	}
 
 	$rootScope.getDataForTemporaryReservation = function(){
-		return { 	reservation_year : angular.element('#year').val(), 
-					reservation_month : angular.element('#month').val(), 
-					reservation_day : angular.element('#day').val(), 
+		return { 	reservation_year : $scope.yearValue,//$scope.yearValue, 
+					reservation_month : $scope.monthValue, //$scope.monthValue, 
+					reservation_day : $scope.dayValue, //$scope.dayValue, 
 					group_id : $scope.getGroup(), 
 					pitch_id : $scope.getPitch(),
-					team_id : angular.element('#team_id').val(),
-					reservation_time : angular.element('#reservation_time').val(),
-					id_user : ( angular.element('#id_user').val() ) ? angular.element('#id_user').val() : '0'
+					team_id : $scope.teamIDValue,//angular.element('#team_id').val(),
+					reservation_time : $scope.reservationTimeValue,//angular.element('#reservation_time').val(),
+					id_user : 0//( angular.element('#id_user').val() ) ? angular.element('#id_user').val() : '0'
 				};
 	}
 
@@ -167,7 +183,7 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
-		 	data: $.param( data ),
+		 	data: $httpParamSerializer( data ),
 		 	cache : false
 		}
 
@@ -178,19 +194,24 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 	}
 
 	$scope.getDateFromServer = function(){
-		$.ajax({
-
-			type: 'POST',
-
-			url : App.getBaseURL() + "getDateFromServer",
-
+		var req = {
+			method: 'POST',
+			url: App.getBaseURL() + "getDateFromServer",
+			headers: {
+			   	'Content-Type': 'application/x-www-form-urlencoded'
+			},
 			async : false,
+		 	cache : false
+		}
 
-			success : function(response){
-				$timeout(function(){
-					$scope.dateFromServer = ( !!Date.parse(response) ) ? response : response.replace(/-/g,'/') + ' GMT';
-				});
-			}
+		$http(req).then(function(response) {
+			var responseData = response.data;
+			$timeout(function(){
+				$scope.dateFromServer = ( !!Date.parse(responseData) ) ? responseData : responseData.replace(/-/g,'/') + ' GMT';
+			});
+		},function(response) {
+		    // called asynchronously if an error occurs
+		    // or server returns response with an error status.
 		});
 	}
 
@@ -213,11 +234,11 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 	}
 
 	$rootScope.isDateForBookingValid = function(){
-		return  new Date(angular.element('#year').val(),angular.element('#month').val() - 1,angular.element('#day').val(),'23','59','59') > new Date($scope.dateFromServer);
+		return  new Date($scope.yearValue,$scope.monthValue - 1,$scope.dayValue,'23','59','59') > new Date($scope.dateFromServer);
 	}
 
 	$rootScope.isAdminUser = function(){
-		return ( !!angular.element('#isAdminUser').val() && /admin/.test(location.href) );
+		return ( /*!!angular.element('#isAdminUser').val()*/ !!$scope.isAdminUserValue && /admin/.test(location.href) );
 	}
 
 	$rootScope.getRol = function(){
@@ -239,10 +260,10 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 			reservation_month,
 			reservation_year;
 
-		data.push([angular.element('#day').val(),angular.element('#month').val(),angular.element('#year').val()]);	
+		data.push([$scope.dayValue,$scope.monthValue,$scope.yearValue]);	
 		for(var i = range; i<= daysPerYear ; i++){
-			var from = new Date(angular.element('#year').val(),angular.element('#month').val() - 1,angular.element('#day').val());
-			var to = new Date(angular.element('#year').val(),angular.element('#month').val() - 1,angular.element('#day').val());
+			var from = new Date($scope.yearValue,$scope.monthValue - 1,$scope.dayValue);
+			var to = new Date($scope.yearValue,$scope.monthValue - 1,$scope.dayValue);
 			to.setDate(from.getDate() + i);
 			if( i % daysPerWeek  == 0 ){
 				reservation_day = to.getDate().toString();
@@ -255,20 +276,20 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 	}
 
 	$rootScope.sendEmail = function(data){
-		angular.element('#sending-email-modal').modal('show');
+		//angular.element('#sending-email-modal').modal('show');
 		var req = {
 			method: 'POST',
 			url: App.getBaseURL() + "sendEmail",
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
-		 	data: $.param( data ),
+		 	data: $httpParamSerializer( data ),
 		 	cache : false
 		}
 
 		$http(req).then(function(response) {
 			//angular.element('#loading-modal').modal('hide');
-			angular.element('#sending-email-modal').modal('hide');
+			//angular.element('#sending-email-modal').modal('hide');
 			$scope.loadReservations();
 	
 		},function(response) {
@@ -278,20 +299,20 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 	}
 
 	$rootScope.sendSMS = function(data){
-		angular.element('#sending-sms-modal').modal('show');
+		//angular.element('#sending-sms-modal').modal('show');
 		var req = {
 			method: 'POST',
 			url: App.getBaseURL() + "sendSMS",
 			headers: {
 			   	'Content-Type': 'application/x-www-form-urlencoded'
 			},
-		 	data: $.param( data ),
+		 	data: $httpParamSerializer( data ),
 		 	cache : false
 		}
 
 		$http(req).then(function(response) {
 			//angular.element('#loading-modal').modal('hide');
-			angular.element('#sending-sms-modal').modal('hide');
+			//angular.element('#sending-sms-modal').modal('hide');
 			$scope.loadReservations();
 	
 		}).error(function(response) {
@@ -337,12 +358,14 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 
 	$scope.loadReservations();
 	$scope.loadPitchsPagination();
+
+	$rootScope.onClickParentContainer = function(){
+		console.log('Click Parent Container');
+		App.setLeavePageConfirmation(true);
+	};
 }]);
 
-angular.element(document).ready(function(){
-	angular.element('body').delegate('a','click', function(){
-		App.setLeavePageConfirmation(true);
-	});
+/*angular.element(document).ready(function(){
 
 	angular.element('#calendar .header').on('mouseenter', function(){
 		angular.element('.days_head, .days_row').show();
@@ -355,4 +378,4 @@ angular.element(document).ready(function(){
 	angular.element('#calendar').on('mouseleave', function(){
 		angular.element('.days_head, .days_row').hide();
 	});
-});
+});*/

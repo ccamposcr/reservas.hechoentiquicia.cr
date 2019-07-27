@@ -2,7 +2,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
   
-class Loginm extends CI_MODEL {
+class Login_model extends CI_MODEL {
  
     function __construct() {
         parent::__construct();
@@ -27,5 +27,5 @@ class Loginm extends CI_MODEL {
     }
 }
   
-/* End of file login_model.php */
-/* Location: ./application/models/login_model.php */
+/* End of file Login_model.php */
+/* Location: ./application/models/Login_model.php */
