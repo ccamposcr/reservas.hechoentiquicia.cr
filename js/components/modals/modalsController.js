@@ -3,7 +3,7 @@
 		var $modalCtrl = this;
 		$modalCtrl.items = ['item1', 'item2', 'item3'];
 
-		$modalCtrl.animationsEnabled = true;
+		$modalCtrl.animationsEnabled = false;
 	  
 		$modalCtrl.open = function (size, parentSelector) {
 		  var parentElem = parentSelector ? 

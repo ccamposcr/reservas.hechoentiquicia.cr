@@ -45,6 +45,7 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 		$http(req).then(function(response) {
 			//$timeout(function(){
 				$scope.reservations = $scope.sortReservations(angular.fromJson(response.data));
+				console.log($scope.reservations);
 			//});
 			//console.log('CHRIS');
 			//$timeout(function(){
@@ -53,7 +54,6 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 
 			//angular.element('#dailyResevations').show();
 			$scope.dailyResevationsActive = true;
-			console.log('dailyResevations');
 	
 		},function(response) {
 		    // called asynchronously if an error occurs
@@ -360,7 +360,6 @@ App.getAppInstance().controller("reservationController", ['$scope','$rootScope',
 	$scope.loadPitchsPagination();
 
 	$rootScope.onClickParentContainer = function(){
-		console.log('Click Parent Container');
 		App.setLeavePageConfirmation(true);
 	};
 }]);

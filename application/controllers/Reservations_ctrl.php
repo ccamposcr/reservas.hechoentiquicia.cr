@@ -75,6 +75,7 @@ class Reservations_ctrl extends CI_Controller {
             $this->load->view('includes/header', $headerOptions->internal);
             $this->load->view('includes/userStatus');
             $this->load->view('reservations_view', $data);
+            $this->load->view('modals_view');
 
             $footerOptions = simplexml_load_file("xml/footer.xml");
 
@@ -111,6 +112,7 @@ class Reservations_ctrl extends CI_Controller {
             $session['session_data'] = $this->session->userdata('logged_in');
             $this->load->view('includes/userStatus', $session );
             $this->load->view('reservations_view', $data);
+            $this->load->view('modals_views');
             
             $footerOptions = simplexml_load_file("xml/footer.xml");
 

@@ -11,7 +11,7 @@ var App = (function () {
 
     var storage = {
 
-        app: angular.module("App", ["ng"]),
+        app: angular.module("App", ["ui.bootstrap"]),
 
         base_url: '/',
 
