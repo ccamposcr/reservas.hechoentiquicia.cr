@@ -104,6 +104,7 @@ $route['getAccountsData'] = 'Api_ctrl/getAccountsData';
 $route['changeRates'] = 'Api_ctrl/changeRates';
 $route['updateResevation'] = 'Api_ctrl/updateResevation';
 $route['updateReservationAllWeeks'] = 'Api_ctrl/updateReservationAllWeeks';
+$route['setClient'] = 'Api_client_ctrl/setClient';
 
 //Login - Logout Routes
 $route['(:any)/login'] = 'Login_ctrl';
